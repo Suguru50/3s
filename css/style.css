@@ -1,0 +1,23 @@
+#tool_black {background-color:black; font-size:200%;}
+#tool_red {background-color:red; font-size:200%;}
+#tool_green {background-color:green; font-size:200%;}
+#tool_blue {background-color:blue; font-size:200%;}
+#tool_small {text-align:center; line-height:44px; font-size:200%;}
+#tool_middle {text-align:center; line-height:44px; font-size:200%;}
+#tool_large {text-align:center; line-height:44px; font-size:200%;}
+.text_msg{
+	font-size:large;
+}
+input[type=checkbox] {
+	display:none;
+}
+
+#tool_info{
+	overflow: auto;	
+}
+/*
+.canvas_canvas {
+	width:450px; height:400px; border:1px solid #ccc;}
+.canvas_canvas canvas {width:450px; height:400px;}
+*/
+
