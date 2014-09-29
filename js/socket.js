@@ -1,8 +1,8 @@
 //①テキストチャットの受け取りと発信
 //  var Cso_socket = io.connect(); //リモート環境？
-  //var Cso_socket = io.connect('http://localhost:3000'); //ローカル
+  var Cso_socket = io.connect('http://localhost:3000'); //ローカル
   //var Cso_socket = io.connect('http://172.16.73.57:3000'); //学校用
-  var Cso_socket = io.connect('http://210.152.156.143:3000'); 
+  //var Cso_socket = io.connect('http://210.152.156.143:3000'); 
   var Cso_userName;
 
   //サーバから受け取るイベント
@@ -29,19 +29,10 @@
   });
 
   Cso_socket.on("clearAll", function (Cso_data) {
-	  clearAll(Cto_canvas,Cto_c);
+	  tool.clearAll(Cto_canvas,Cto_c);
   });
 
   //クライアントからイベント送信（イベント名は自由に設定できます）
-  /*
-  function sendMessage() {
-    var Cso_msg = $("#text_message").val(); //取得
-    $("#text_message").val(""); //空白にする
-	console.log("unko"+Cso_userName);
-    Cso_socket.emit("C_to_S_message", {msg:Cso_msg, user:Cso_userName}); //サーバへ送信
-    
-  }
-  */
 
   function enterRoom(msg,user) {
 	console.log("haittetet"+user);

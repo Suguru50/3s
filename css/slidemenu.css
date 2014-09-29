@@ -1,0 +1,95 @@
+body {
+   margin:0px;
+	padding: 0;
+}
+.R_slide_panel .L_slide_panel{
+	position: absolute;
+	margin: 0;	padding: 0 0 0 0;
+	/* ポイント：横幅指定とはみ出し非表示にする事で、横幅が0に近づいても文字の改行を押さえる(改行させない) */
+	width:220px; 
+	height: 100%;
+	cursor: pointer;
+	overflow: hidden;	/* ←重要 */
+}
+.R_slide_panel {
+	right:0px;
+}
+.L_slide_panel {
+	left:0px;
+}
+.R_slide_panel div,img,input,output,label {
+	overflow:hidden;
+}
+.L_slide_panel div,img,input,output,label {
+	overflow:hidden;
+}
+#canvas_view{
+	overflow:hidden;
+}
+#toolbutton{
+	float:left;
+}
+#toolButtonContainer{
+	width:230px;
+}
+	
+	.R_slide_panel .menu_off{
+		width:15px;
+		height:-webkit-calc(100% + 180px);/*180はcanvasviewの大きさ。
+				jsで後から動的に追加される要素なので100%の大きさを計る時に
+			   考慮されないので*/
+		background-color: red;
+		float: left;
+	}
+	.L_slide_panel .menu_off{
+		width:15px;
+		height:-webkit-calc(100%);
+		background-color: blue;
+		float: right;
+	}
+
+	.active{
+		background-position: -20px 0;
+		height:100% !important;
+	}
+		#slide_panel .wrap .panel_main{
+			margin-left: 10px;/*開いたときの赤いやつの幅*/
+			padding: 0 0 3px 2px;
+			background-color: #9ac;
+		}
+
+.displayNone{
+	display:none;
+}
+.L_main{
+	width:180px;
+	float:left;
+}
+/*内容のcss*/	
+ .panel_main ul{
+	margin:0 0 0 5px; padding: 0 0 0 0;
+	padding:0;
+}
+	.panel_main li{
+		list-style: none;
+		display:block;
+	}
+		 .panel_main li a{
+			display:block;
+			margin: 0; padding: 2px 0 3px 10px;
+			color: #999;
+			background-color: #FFF;
+			border-bottom: 1px solid #999;
+			border-right: 8px solid #669;
+			text-decoration:none;
+			
+		}
+		.panel_main li a:hover{
+			color:#000000;
+			background-color: #FEE;
+		}
+
+.panel_main ul{
+display:inline-block;
+}
+

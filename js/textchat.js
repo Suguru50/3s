@@ -4,17 +4,6 @@ TextChat.prototype.sendButton;
 TextChat.prototype.textMessage;
 
 TextChat.prototype.message;
-/*
-TextChat.prototype.enterSetUp = function(){
-	this.enterButton = document.getElementById("text_enterbutton");
-	this.enterButton.onclick = (function(button) {
-		return function() {
-			alert("aaaa");
-			//enterRoom();
-		};
-	})(this.enterButton);
-}*/
-
 TextChat.prototype.textChatSetUp = function (){
 	this.sendButton = document.getElementById("text_sendbutton");
 	this.textMessage = document.getElementById("text_message");

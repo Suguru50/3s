@@ -100,6 +100,11 @@ function canvasSetUp() {
 			Cto_c.lineTo(Cca_pos.x, Cca_pos.y);
 			Cto_c.stroke();
 			Cto_c.closePath();
+        	Cto_c.beginPath();
+        	Cto_c.moveTo(0,0);
+			Cto_c.lineTo(300,300);
+			Cto_c.stroke();
+			Cto_c.closePath();
 		  }
         // socket.IOサーバーに、
         // どの点からどの点までを描画するかをの情報を送付する

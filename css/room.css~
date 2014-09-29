@@ -125,6 +125,7 @@ article {
 #canvas_margin {
 	width: 2500px;
 	height: 2500px;	
+	position: relative; /*0923*/
 }
 
 #buttonblock{
