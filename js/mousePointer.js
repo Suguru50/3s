@@ -2,19 +2,19 @@ function mousePointer(pointer){
 	switch(pointer){
 		case 1:
 			//AUTO
-			Cto_canvas.style.cursor = "auto";
+			document.getElementById("canvas_myCanvas").style.cursor = "auto";
 			break;
 		case 2:
 			//DEFAULT
-			Cto_canvas.style.cursor = "default";
+			document.getElementById("canvas_myCanvas").style.cursor = "default";
 			break;
 		case 3:
 			//CROSSHAIR
-			Cto_canvas.style.cursor = "crosshair";
+			document.getElementById("canvas_myCanvas").style.cursor = "crosshair";
 			break;
 		case 4:
 			//MOVE
-			Cto_canvas.style.cursor = "move";
+			document.getElementById("canvas_myCanvas").style.cursor = "move";
 			break;
 
 	}
