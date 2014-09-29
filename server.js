@@ -146,8 +146,7 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
 			Sso_socket.join(Sso_data.room,function (){
 				Sso_io.sockets.in(Sso_data.room).emit("enterRoomName", {room:Sso_data.room, user:Sso_data.user});
 				if(Sso_io.sockets.clients(Sso_data.room).length>1){
-					Sso_io.sockets.socket(getLogMaximumPreferenceUserID(getEnteringRoomName(Sso_socket),Sso_io))
-															.emit("logRequest",{userID:getEmitUserID(Sso_socket)});
+					Sso_io.sockets.socket(getLogMaximumPreferenceUserID(getEnteringRoomName(Sso_socket),Sso_io)).emit("logRequest",{userID:getEmitUserID(Sso_socket)});
 				}
 			});
 		}else{
@@ -191,8 +190,6 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
 
 
 function isNull(Sso_data){
-	console.log("Sso_data = ");	
-	console.dir(Sso_data);	
 	if(Sso_data==""){
 		Sso_data = "default";
 		return false;
