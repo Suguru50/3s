@@ -1,0 +1,63 @@
+#top{
+
+width:300px;
+height:200px;
+margin-left:auto;
+margin-right:auto;
+margin-top:100px;
+background:#fff;
+color:#999;
+}	
+#testa{
+display: inline-block;
+}
+
+li{
+	list-style: none;
+}
+input{
+   text-align:center;
+}
+@font-face {
+  font-family: 'title';
+  src: url('/images/Chunkfive.otf');
+}
+ 
+#title_box{
+height:100px;
+}
+
+.title{
+  font-family:'title';
+  font-size:300%;
+  color: #000;
+}
+
+#top img{
+margin:0;
+float:left;
+}
+
+.text_text{
+height: 10%;
+width:90%;
+}
+
+#testa{
+display:table-cell;
+text-align:center;
+vertical-align:middle;
+}
+
+
+
+#testb{
+width:300px;
+margin-left:auto;
+margin-right:auto;
+}
+
+#text_enterbutton{
+height: 80%;
+width: 200%;
+}
