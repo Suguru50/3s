@@ -17,6 +17,7 @@ $(function() {
 });
 
 function enterAjax() {
+	console.log("call enterAjax");
 	$("#shadow").css('display', 'block');
 	$.ajax({
 		type: 'POST',
@@ -32,6 +33,7 @@ function enterAjax() {
 }
 
 function leaveButtonSetUp(){
+	console.log("call buttonsetup");
 	$('#text_leavebutton').click(function() {
 		//$("#shadow").css('display', 'block');
 		$("header").css("display","none");
@@ -51,6 +53,7 @@ function leaveButtonSetUp(){
 }
 
 function enterRoomSetUp(){
+	console.log("call enterroomsetup");
 	var roomtext = document.getElementById("text_room");
 	roomtext.setAttribute("onkeypress","roomEnter()");
 
@@ -66,6 +69,7 @@ function roomEnter(){
 }
 
 function ajaxEnter(){
+	console.log("call ajaxenter");
 	$("#shadow").css('display', 'block');
 	$("header").css("display","block");
 	$.ajax({
@@ -101,9 +105,10 @@ function ajaxEnter(){
 
 			//textChatSetUp();
 			leaveButtonSetUp();
+		console.log("before enterRoom");
 			enterRoom(Cso_msg,Cso_user);
 		},error:function() {
-			alert('error');
+			alert('error1111111');
 		}
 	});
 }
