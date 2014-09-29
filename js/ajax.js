@@ -87,7 +87,7 @@ function ajaxEnter(){
 
 			$("#text_userArea").val("");
 			$('article').html(data);
-			Cto_canvas = document.getElementById("canvas_myCanvas");
+			Cto_canvas = document.getElementById("canvas_myCanvas1");
 			Cto_c = Cto_canvas.getContext("2d");
 			Cto_cv = document.getElementById('canvas_view');
 			Cto_cvc = Cto_cv.getContext('2d');

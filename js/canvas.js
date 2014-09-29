@@ -20,23 +20,38 @@ function canvasSetUp() {
 
     // Canvas上の座標を計算する為の関数たち
     function scrollX(){
+	  var div = document.getElementById("canvas_canvas");
+      return div.scrollLeft;
+    }
+    function scrollY(){
+	  var div = document.getElementById("canvas_canvas");
+      return div.scrollTop;
+    }
+	/*
+    function scrollX(){
       return document.documentElement.scrollLeft || document.body.scrollLeft;
     }
     function scrollY(){
       return document.documentElement.scrollTop || document.body.scrollTop;
     }
+	*/
     function getPos (Cca_event) {
-
-      var Cca_mouseX = (Cca_event.clientX - $(Cto_canvas).position().left + scrollX())/tool.getPageSize();
-      var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top + scrollY())/tool.getPageSize();
-
+      //var Cca_mouseX = (Cca_event.clientX - $(Cto_canvas).position().left + scrollX())/tool.getPageSize();documentElement.scrollTop
+      //var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top + scrollY())/tool.getPageSize();
+      var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top)/tool.getPageSize();
+      var Cca_mouseX = (Cca_event.clientX - ($(Cto_canvas).position().left-200+
+				  parseInt($(canvas_canvas).css('margin-left'),10)))/tool.getPageSize();
+	  //幅が大きくなった場合にposition().leftが大きくならないのが原因
+	  //200は左のメニューの開閉クリック領域を含む幅
 	  return {x:Cca_mouseX, y:Cca_mouseY};
     }
-    function getPosT (Cca_event) {
+	/*
+    function getPosTest (Cca_event) {
       var Cca_mouseX = Cca_event.touches[0].clientX - $(Cto_canvas).position().left + scrollX();
       var Cca_mouseY = Cca_event.touches[0].clientY - $(Cto_canvas).position().top + scrollY();
       return {x:Cca_mouseX, y:Cca_mouseY};
     }
+	*/
                                  
     // ここからは、Canvasに描画する為の処理                             
     Cto_canvas.addEventListener("mousedown", function (Cca_event) {
@@ -81,6 +96,7 @@ function canvasSetUp() {
 		  else{
         	Cto_c.beginPath();
         	Cto_c.moveTo(Cca_oldPos.x, Cca_oldPos.y);
+			console.log("paintmovex"+Cca_oldPos.x+",y"+Cca_oldPos.y);
 			Cto_c.lineTo(Cca_pos.x, Cca_pos.y);
 			Cto_c.stroke();
 			Cto_c.closePath();
