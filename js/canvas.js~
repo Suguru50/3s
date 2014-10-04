@@ -3,8 +3,8 @@ function canvasSetUp() {
 	var	canvaswindow     = document.getElementById("canvas_canvas");
 	canvaswindow.onscroll = function(){
 		console.log("スクロール"+canvaswindow.scrollLeft+"px,"+canvaswindow.scrollTop+"px");
-		$("#brushcatcher").css("-webkit-transform","translate("+canvaswindow.scrollLeft+"px,"+
-													canvaswindow.scrollTop+"px");
+		//$("#brushcatcher").css("-webkit-transform","translate("+canvaswindow.scrollLeft+"px,"+
+		//											canvaswindow.scrollTop+"px");
 	};
 	
     // Canvas描画に必要な変数を定義する

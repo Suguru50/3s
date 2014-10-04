@@ -1,7 +1,9 @@
 var Cto_canvas;
 var Cto_c;
 var tool;
+var tab;
 var textChat;
+var tabColorArray = ["#2e8b57","#ff8c00","ff6374","4682b4"];
 $(function() {
 	enterAjax();
 	$("#shadow").css({
@@ -87,13 +89,14 @@ function ajaxEnter(){
 
 			$("#text_userArea").val("");
 			$('article').html(data);
-			Cto_canvas = document.getElementById("canvas_myCanvas");
+			Cto_canvas = document.getElementById("canvas_myCanvas1");
 			Cto_c = Cto_canvas.getContext("2d");
 			Cto_cv = document.getElementById('canvas_view');
 			Cto_cvc = Cto_cv.getContext('2d');
 			//toolSetUp();
 			tool = new Tool();
 			tool.toolSetUp(Cto_canvas,Cto_c);
+			tab = new TabMenu(document.getElementById("tablist"),tabColorArray);
 			textChat = new TextChat();
 			textChat.textChatSetUp();
 

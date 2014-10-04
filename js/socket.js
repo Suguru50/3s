@@ -29,19 +29,10 @@
   });
 
   Cso_socket.on("clearAll", function (Cso_data) {
-	  clearAll(Cto_canvas,Cto_c);
+	  tool.clearAll(Cto_canvas,Cto_c);
   });
 
   //クライアントからイベント送信（イベント名は自由に設定できます）
-  /*
-  function sendMessage() {
-    var Cso_msg = $("#text_message").val(); //取得
-    $("#text_message").val(""); //空白にする
-	console.log("unko"+Cso_userName);
-    Cso_socket.emit("C_to_S_message", {msg:Cso_msg, user:Cso_userName}); //サーバへ送信
-    
-  }
-  */
 
   function enterRoom(msg,user) {
 	console.log("haittetet"+user);

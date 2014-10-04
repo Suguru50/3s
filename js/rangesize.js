@@ -34,4 +34,3 @@ function tool_airbrush(x,y) {
 function getGrad(){
 	return grad;
 }
-
