@@ -1,0 +1,64 @@
+.animeframe{
+	height:200px;
+	width:200px;
+	background: #999;
+}
+
+.framewrapper{
+	position:relative;
+}
+.frameadd{
+	width:-webkit-fit-content;
+	font-size:36px;
+	font:bold;
+	color:white;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	background:#333;
+	opacity:0.3;
+	position: absolute;
+	left:1px;
+	bottom:5px;
+    -webkit-transition: 0.2s ease-in-out;
+       -moz-transition: 0.2s ease-in-out;
+         -o-transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out;
+}
+.frameadd:hover{
+	opacity:1;
+	filter:alpha(opacity=60);/*IE用*/
+}
+.frameremove{
+	width:-webkit-fit-content;
+	font-size:36px;
+	font:bold;
+	color:white;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	background:#333;
+	opacity:0.3;
+	position: absolute;
+	right:1px;
+	top:1px;
+    -webkit-transition: 0.2s ease-in-out;
+       -moz-transition: 0.2s ease-in-out;
+         -o-transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out;
+}
+.frameremove:hover{
+	opacity:1;
+	filter:alpha(opacity=60);/*IE用*/
+}
+.framenumber{
+	width:-webkit-fit-content;
+	font-size:40px;
+	color:white;
+	opacity:0.9;
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+
+

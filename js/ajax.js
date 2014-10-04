@@ -1,7 +1,9 @@
 var Cto_canvas;
 var Cto_c;
 var tool;
+var tab;
 var textChat;
+var tabColorArray = ["#2e8b57","#ff8c00","ff6374","4682b4"];
 $(function() {
 	enterAjax();
 	$("#shadow").css({
@@ -94,6 +96,7 @@ function ajaxEnter(){
 			//toolSetUp();
 			tool = new Tool();
 			tool.toolSetUp(Cto_canvas,Cto_c);
+			tab = new TabMenu(document.getElementById("tablist"),tabColorArray);
 			textChat = new TextChat();
 			textChat.textChatSetUp();
 

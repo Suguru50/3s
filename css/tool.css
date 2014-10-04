@@ -1,0 +1,48 @@
+#tool_info {
+	position: absolute;
+	top: 0px;
+	left: auto;
+	right: 0px;
+	bottom: 0px;
+	width: 250px;
+	height: 100%;
+	/*background: #555;*/
+	background: #2e8b57;
+	float: right;
+}
+
+#tabs{
+	height:100%;
+}
+
+#tab1{
+	background-color:#2e8b57!important;
+	height:100%;
+	padding-left:25px;
+	overflow-y:auto;
+}
+#tab2{
+	background-color:#ff8c00!important;
+	height:100%;
+	color:white;
+	opacity:0;
+	display:none;
+	padding-left:25px;
+}
+#tab3{
+	background-color:#ff6374!important;
+	height:100%;
+	color:white;
+	opacity:0;
+	display:none;
+	padding-left:25px;
+}
+#tab4{
+	background-color:#4682b4!important;
+	height:100%;
+	color:white;
+	opacity:0;
+	display:none;
+	padding-left:25px;
+}
+

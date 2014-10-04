@@ -1,5 +1,12 @@
 function canvasSetUp() {
-  //------
+	//キャッチャーの位置調整
+	var	canvaswindow     = document.getElementById("canvas_canvas");
+	canvaswindow.onscroll = function(){
+		console.log("スクロール"+canvaswindow.scrollLeft+"px,"+canvaswindow.scrollTop+"px");
+		$("#brushcatcher").css("-webkit-transform","translate("+canvaswindow.scrollLeft+"px,"+
+													canvaswindow.scrollTop+"px");
+	};
+	
     // Canvas描画に必要な変数を定義する
     var Cca_w = 2000;
     var Cca_h = 2000;
@@ -36,8 +43,6 @@ function canvasSetUp() {
     }
 	*/
     function getPos (Cca_event) {
-      //var Cca_mouseX = (Cca_event.clientX - $(Cto_canvas).position().left + scrollX())/tool.getPageSize();documentElement.scrollTop
-      //var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top + scrollY())/tool.getPageSize();
       var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top)/tool.getPageSize();
       var Cca_mouseX = (Cca_event.clientX - ($(Cto_canvas).position().left-200+
 				  parseInt($(canvas_canvas).css('margin-left'),10)))/tool.getPageSize();
@@ -45,13 +50,6 @@ function canvasSetUp() {
 	  //200は左のメニューの開閉クリック領域を含む幅
 	  return {x:Cca_mouseX, y:Cca_mouseY};
     }
-	/*
-    function getPosTest (Cca_event) {
-      var Cca_mouseX = Cca_event.touches[0].clientX - $(Cto_canvas).position().left + scrollX();
-      var Cca_mouseY = Cca_event.touches[0].clientY - $(Cto_canvas).position().top + scrollY();
-      return {x:Cca_mouseX, y:Cca_mouseY};
-    }
-	*/
                                  
     // ここからは、Canvasに描画する為の処理                             
     Cto_canvas.addEventListener("mousedown", function (Cca_event) {
@@ -225,10 +223,10 @@ function canvasSetUp() {
 	
 	//キャンバスのスクロール初期値
 	//中心あたりを表示
-	document.getElementById("canvas_canvas").scrollTop = 1000;
-	document.getElementById("canvas_canvas").scrollLeft = 900;
+	canvaswindow.scrollTop = 1000;
+	canvaswindow.scrollLeft = 900;
 
-
+	
 }
 
 

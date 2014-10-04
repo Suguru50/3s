@@ -37,18 +37,19 @@ canvas_myCanvas2{
 
 
 <div id="canvas_canvas" tabindex="1">
+	<input type="button" id="text_sendbutton" style="padding:5px" value="送信" />
 	<div id="canvas_margin">
 		<canvas id="canvas_myCanvas1">
 		</canvas>
-		<canvas  id="canvas_myCanvas2" style="display:none">
+		<canvas  id="canvas_myCanvas2">
 		</canvas>
-		<div id="brushcatcher" style="display:none"></div>
+		<div id="brushcatcher"></div>
 	</div>
 </div>
 
 <div id="chat">
 	<div id="text_roomArea">
-		<input type="button" id="text_sendbutton" style="padding:5px" value="送信" />
+
 		<!--input type="button" id="text_leavebutton" style="padding:5px" value="退室" /-->
 		<div id="text_msg_list" style="height:100px; overflow:auto;">
 		</div>
