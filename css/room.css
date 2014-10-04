@@ -39,6 +39,46 @@ body {
 	margin: 0;
 	height: 100%;
 }
+header {
+	height: 50px;
+	background-color: #FC6;
+	position: relative;
+	display: none;
+}
+header img {
+	float: left;
+}
+header h1 {
+	float: left;
+	font-size: 20px;
+	width: 300px;
+	color: #fff;
+	margin: 0;
+}
+header ul {
+	position: relative;
+	width: 250px;	
+	margin: 0 0 0 auto;
+	z-index: 10000;
+}
+header li {
+	list-style: none;
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+.header_lock {
+	background: url(../images/lock.png);
+}
+.header_kick {
+	background: url(../images/kick.png);
+}
+.header_share {
+	background: url(../images/share.png);
+}
+.header_logout {
+	background: url(../images/logout.png);
+}
 
 
 
@@ -62,7 +102,17 @@ article {
 	margin: 0;
 	float: left;
 }
-
+#tool_info {
+	position: absolute;
+	top: 0px;
+	left: auto;
+	right: 0px;
+	bottom: 0px;
+	width: 250px;
+	height: 100%;
+	background: #555;
+	float: right;
+}
 
 #text_roomArea {
 	margin: 10px 30px 0 30px;
@@ -91,19 +141,20 @@ article {
 	height: 2000px;
 	-webkit-transform: translate(450px,300px)
 }
-
+/*
 #canvas_myCanvas2 {
 	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
 	margin: -50px -200px 0 -200px;
 	background: white;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
-	-webkit-transform: translate(450px,300px);
-	z-index: 98;
-	background-color:red;
-	opacity:0.5;
+	-webkit-transform: translate(450px,300px)
 }
+*/
 
 #colorWheelContainer{
 	width:230px;
@@ -259,24 +310,3 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 	z-index: 1000;
 }
 
-#layers{
-	width:230px;
-}
-#button_horizontal{
-	width:230px;
-}
-#button_horizontal_inner{
-	float:left;
-}
-
-#brushcatcher{
-	background:rgb(0,0,250);
-	opacity:0.7;
-	position:absolute;
-	top: 0px;
-	vertical-align: bottom;
-	width: 101%;
-	height: 101%; /*なぜか上下左右に1pxずれるので大きめにとった*/
-	/*-webkit-transform: translate(1000px,1000px);*/
-	z-index: 98;
-}

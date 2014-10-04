@@ -43,7 +43,9 @@ body {
 	}
 	.L_slide_panel .menu_off{
 		width:15px;
-		height:-webkit-calc(100%);
+		height:-webkit-calc(100% + 180px);/*180はcanvasviewの大きさ。
+				jsで後から動的に追加される要素なので100%の大きさを計る時に
+			   考慮されないので*/
 		background-color: blue;
 		float: right;
 	}
