@@ -76,10 +76,7 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
   	var myID = getEmitUserID(socket);
 	var Sso_inID = Sso_io.sockets.manager.roomClients[myID];
 	var Sso_enteringName;
-	console.log("myID:"+myID+"です１");
-	console.log("Sso_inID:"+Sso_util.inspect(Sso_inID)+"です2");
 	for(key in Sso_inID){
-		console.log("key = "+key+"です3");
 		Sso_enteringName = key;//最後尾が欲しい = ループの最期
 	}
 	Sso_enteringName = Sso_enteringName.slice(1);
@@ -140,7 +137,6 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
 		default:
 			break;
 	}
-	//if(Sso_enc.isNull(Sso_data.room)==true){
 		if(!isRoomIn(Sso_enteringRoom)){
 			Sso_roomName.push(Sso_data.room);
 			Sso_socket.join(Sso_data.room,function (){
@@ -170,7 +166,6 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
 		Sso_leaveRoom = Sso_leaveRoom.slice(1);
 		Sso_socket.broadcast.to(Sso_leaveRoom).emit("leaveRoomName",{user:user});
 		Sso_socket.leave(Sso_leaveRoom);
-//		Sso_io.sockets.socket(myID).emit("leaveRoomName",{user:user});
 
 	}
   }

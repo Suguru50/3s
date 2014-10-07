@@ -117,8 +117,6 @@ function ajaxEnter(){
 
 			canvasSetUp();
 
-			animationSetup();
-
 			//textChatSetUp();
 			leaveButtonSetUp();
 			enterRoom(Cso_msg,Cso_user);

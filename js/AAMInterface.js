@@ -114,24 +114,18 @@ ColorWheel.prototype.wheelInit = function(element, w, h,canvasContext){
 	this._frontcanvas.width = 28;
 	this._frontcanvas.height = 28;
 	this._frontcanvas.style.top = '200px';
-	this._frontcanvas.style.left = '15px';
+	this._frontcanvas.style.left = '25px';
 	this._frontctx = this._frontcanvas.getContext("2d");
 	this._frontcanvas.style.position = 'absolute';
 	this._frontcanvas.style.zIndex = '2';
 	element.appendChild(this._frontcanvas);
 	this._frontcanvas.addEventListener( "click" ,function(){
-		console.log("aaa1"); 
 		this._current=1;
-		console.log("frontclick時thiscolor1"+this.color1);
 		this.callback(this._color1,this._canvasctx)}.bind(this), false );
-//ためし
-
 	this._backcanvas = document.createElement("canvas");
 	this._backcanvas.width = 28;
 	this._backcanvas.height = 28;
 	this._backctx = this._backcanvas.getContext("2d");
-	//this._backcanvas.style.top = '83px';
-	//this._backcanvas.style.left = '83px';
 	this._backcanvas.style.marginTop = '13px';
 	this._backcanvas.style.marginLeft = '16px';
 	this._backcanvas.style.display = 'inline';
@@ -662,4 +656,7 @@ ColorWheel.prototype.toolSpuit = function(x,y){
 		this._backctx.fillRect(3,3,22,22);
 
 	}
+}
+ColorWheel.prototype.switchColorContext = function(context){
+	this._canvasctx = context;
 }

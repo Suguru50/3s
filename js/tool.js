@@ -19,13 +19,6 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 	this.colorWheel = new ColorWheel();//インスタンスをつくってる。AAMInterface.jsにあった。40行目くらい
 	this.colorWheel.wheelInit(document.getElementById("colorWheelContainer"), 200, 200,context);
 	this.colorWheel.pickerInit(document.getElementById("colorWheelContainer"));
-    $("#tool_black").click(function () {context.strokeStyle = "black";});
-    $("#tool_blue").click(function () {context.strokeStyle = "blue";});
-    $("#tool_red").click(function () {context.strokeStyle = "red";});
-    $("#tool_green").click(function () {context.strokeStyle = "green";});
-    $("#tool_small").click(function () {context.lineWidth = 5;});
-    $("#tool_middle").click(function () {context.lineWidth = 10;});
-    $("#tool_large").click(function () {context.lineWidth = 20;});
 	
 	$("#tool_eraser").click(function () {
 		if(context.globalCompositeOperation === "source-over"){
@@ -36,9 +29,11 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 	});
 
     $("#tool_clear").click(function(){
-		this.clearAll(this.canvas,context);
-		Cso_socket.emit("clearAll",{value:""});
-		view();
+		if(confirm("消す？")){
+			this.clearAll(Cto_canvas,Cto_c);
+			Cso_socket.emit("clearAll",{value:""});
+			view();
+		}
 	}.bind(this));
 
 	$("#tool_airbrush").click(function(){
@@ -84,6 +79,7 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 	// 選択状態を初期化する
 	air.filter(":checked").trigger("change");
 }
+
 
 Tool.prototype.getAirBrushStatus = function(){
 	return this.airBrush;

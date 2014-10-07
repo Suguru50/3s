@@ -7,10 +7,6 @@
 <script src="js/mousePointer.js"></script>
 <script src="js/slidemenu.js"></script>
 <style>
-canvas_myCanvas2{
-	background-color:red;
-	opacity:0.5;
-}
 </style>
 <div id="video_info" class="L_slide_panel">
 <!--手書きチャット部分-->
@@ -40,19 +36,22 @@ canvas_myCanvas2{
 	<div id="canvas_margin">
 		<canvas id="canvas_myCanvas1">
 		</canvas>
-		<canvas  id="canvas_myCanvas2" style="display:none">
+		<canvas  id="canvas_myCanvas2">
 		</canvas>
-		<div id="brushcatcher" style="display:none"></div>
+		<canvas  id="canvas_toolcanvas">
+		</canvas>
+		<div id="brushcatcher"></div>
 	</div>
 </div>
 
 <div id="chat">
 	<div id="text_roomArea">
-		<input type="button" id="text_sendbutton" style="padding:5px" value="送信" />
+
 		<!--input type="button" id="text_leavebutton" style="padding:5px" value="退室" /-->
 		<div id="text_msg_list" style="height:100px; overflow:auto;">
 		</div>
 		<input type="text" class="text_text" style="width:60%; padding:5px" id="text_message"/>
+		<input type="button" id="text_sendbutton" style="padding:5px;" value="送信" disabled/>
 	</div>
 </div><!-- chat end -->
 <div id="zoomInfo"></div>
@@ -90,12 +89,12 @@ canvas_myCanvas2{
 				</div>
 			</div>
 
-			<!--div id="layers">
+			<div id="layers">
 				<div id="button_horizontal_inner"><input type="button" value="○" id="viewLayer1" onClick="viewLayer(1)"></div>
 				<div id="button_horizontal_inner"><input type="button" value="Layer 1" id="layer1" onClick="changeLayer(1)" class="selected"></div>
 				<div id="button_horizontal_inner"><input type="button" value="○" id="viewLayer2" onClick="viewLayer(2)"></div>
 				<div id="button_horizontal_inner"><input type="button" value="Layer 2" id="layer2" onClick="changeLayer(2)"></div>
-			</div-->
+			</div>
 
 			<canvas id="canvas_view"></canvas>
 			<div id="button_horizontal">
@@ -106,12 +105,9 @@ canvas_myCanvas2{
 		</div><!--tab1 end -->
 		<div id="tab2">
 		<!--Animation area-->
- <ul id="frame_list" style="float:right">
-	 <li><button id="addframe" type="button" onclick="addFrame()">フレーム追加</button><button id="addimg1" type="button" onclick="createAnimation()">アニメ化</button></li>
-	 <li><div class="framewrapper"><div id="addimg1" class="frameadd">Add</div><div id="remove1" class="frameremove">×</div><canvas id="1_img" class="animeframe"></canvas>
-		 	<div class="framenumber">1</div></div></li>
-	 <li>アニメ出力結果.<img id="anim"></li>
- </ul>
+		<ul id="frame_list"><li><button id="addframe" type="button" onclick="addFrame()">フレーム追加</button><button id="" type="button" onclick="createAnimation()">アニメ化</button><button id="" onclick="switchAnimationMode()">フレーム選択モード</button></li>
+	 <li><div class="framewrapper"><div id="addimg1" class="frameadd">Add</div><div id="remove1" class="frameremove">×</div><canvas id="1_img" class="animeframe"></canvas><div class="framenumber">1</div></div></li>
+	 <li><div>アニメ出力結果.<img id="anim"></div></li></ul>
 
 		<!--Animation area end-->
 		</div>

@@ -95,14 +95,24 @@ article {
 #canvas_myCanvas2 {
 	position: absolute;
 	margin: -50px -200px 0 -200px;
-	background: white;
+	/*background: white;*/
+	vertical-align: bottom;
+	width: 2000px;
+	height: 2000px;
+	-webkit-transform: translate(450px,300px);
+	z-index: 97;
+}
+
+#canvas_toolcanvas{
+	position: absolute;
+	margin: -50px -200px 0 -200px;
+	background: red;
+	opacity:0.5;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
 	-webkit-transform: translate(450px,300px);
 	z-index: 98;
-	background-color:red;
-	opacity:0.5;
 }
 
 #colorWheelContainer{
@@ -270,13 +280,12 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 }
 
 #brushcatcher{
-	background:rgb(0,0,250);
-	opacity:0.7;
+	opacity:0;
 	position:absolute;
 	top: 0px;
 	vertical-align: bottom;
 	width: 101%;
-	height: 101%; /*なぜか上下に1pxずれるので大きめにとった*/
+	height: 101%; /*なぜか上下左右に1pxずれるので大きめにとった*/
 	/*-webkit-transform: translate(1000px,1000px);*/
 	z-index: 98;
 }

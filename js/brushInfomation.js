@@ -6,5 +6,6 @@ brushInfomation = function (){
 	var brushGlobalAlpha;
 	var globalCompositeOperation = false;
 	var isBlur = false;
+	var layerNum = 1;
 }
 
