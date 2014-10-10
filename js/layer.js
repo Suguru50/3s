@@ -1,7 +1,7 @@
 var currentLayer = 1;
 // LayerSistem
 function changeLayer(LNo){
-	$("#layers button.selected").removeClass("selected");
+	$(".layerbutton.selected").removeClass("selected");
 	$("#layer"+LNo).addClass("selected");
 	switchLayerInfo(eval("Cto_layercanvas"+LNo),eval("Cto_lc"+LNo),Cto_canvas,Cto_c);
 	Cto_canvas = eval("Cto_layercanvas"+LNo+";");
@@ -12,29 +12,21 @@ function changeLayer(LNo){
 
 
 //Layer On Off
-var visible1 = true;
-var visible2 = true;
+var visible = [true,true];
+
 function viewLayer(vLNo){
-	if(vLNo == 1){
-		if(visible1) {
-			Cto_canvas.style["display"]="none";
-			visible1 = false;
-		}else{
-			Cto_canvas.style["display"]="block";
-			visible1 = true;
-		}
+	Cto_vL = eval("Cto_layercanvas"+vLNo+";");
+	visibleLayer = eval("visible["+(vLNo-1)+"];");
+	if(visibleLayer) {
+		Cto_vL.style["display"]="none";
+		visible[vLNo-1] = false;
+	}else{
+		Cto_vL.style["display"]="block";
+		visible[vLNo-1] = true;
 	}
-	if(vLNo == 2){
-		View2=document.getElementById("canvas_myCanvas2");
-		if(visible2){
-			View2.style["display"]="none";
-			visible2 = false;
-		}else{
-			View2.style["display"]="block";
-			visible2 = true;
-		}
-	}
+	$("#viewLayer"+vLNo).toggleClass("visible");
 }
+
 
 function switchLayerInfo(tocanvas,toctx,fromcanvas,fromctx){
 	//メモ

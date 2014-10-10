@@ -10,7 +10,6 @@ TabMenu = function(ulelement,cArr){
 				this.addLiClickListener(linode[i],cnt);
 			}
 		}
-	console.log("タブの数は"+cnt+"です");
 }
 TabMenu.prototype.currentTab = 1;
 
@@ -19,14 +18,13 @@ TabMenu.prototype.changeTab = function(tabindex){
 }
 
 TabMenu.prototype.addLiClickListener = function(lielement,index){
-	console.log("インデックスは"+index+"です");
 	$(lielement).click(function(){
 		if(this.currentTab!=index){
 			$("#tab"+this.currentTab).fadeTo("fast",0,function(){
 				$("#tab"+this.currentTab).css("display","none");
 				$("#tab"+index).fadeTo("fast",1,function(){
 					$("#tab"+index).css("display","block");
-					this.currentTab = index;
+					this.currentTab = index;					
 				}.bind(this));
 			}.bind(this));
 		}

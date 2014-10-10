@@ -16,7 +16,13 @@
   Cso_socket.on("enterRoomName", function (Cso_data) {
 	document.getElementById("tool_roomName").innerHTML = Cso_data.room;
     addMessage(Cso_data.room + "に" + Cso_data.user + "が入室しました。");
-	$("#shadow").css('display', 'none');
+	$("#shadow").animate({
+		opacity:'0'
+	},200,function(){
+		$("#shadow").css(
+			"display","none"
+		);
+	});
   });
 
   Cso_socket.on("cantEnterRoomName", function (Cso_data) {
@@ -35,21 +41,27 @@
   //クライアントからイベント送信（イベント名は自由に設定できます）
 
   function enterRoom(msg,user) {
-	console.log("haittetet"+user);
     Cso_socket.emit("roomInfo", {room:msg, user:user}); //サーバへ送信
     Cso_userName = user;
   }
 
+/*
   //jqueryでメッセージを追加
-  function addMessage (Cso_value,Cso_color,Cso_size) {
+  function addMessage (Cso_value,Cso_color,Cso_size) {l
     var Cso_msg = value.replace( /[!@$%<>'"&|]/g, '' ); //タグ記号とかいくつか削除
     $("#text_msg_list").prepend("<div class='text_msg'>" + Cso_msg + "</div>");
   }    
+  */
   //jqueryでメッセージを追加
+  var msgcnt = 0;
   function addMessage (Cso_value,Cso_color,Cso_size) {
 	var Cso_msg = Cso_value.replace( /[!@$%<>'"&|]/g, '' ); //タグ記号とかいくつか削除
-	$("#text_msg_list").prepend("<div class='text_msg'>" + Cso_msg + "</div>");
-  } 
+	$("#text_msg_list").prepend("<div id='msg"+msgcnt+"' class='text_msg' style='opacity:0;'>" + Cso_msg + "</div>");
+	$("#msg"+msgcnt).animate({
+		opacity:"1"
+	},400);
+	msgcnt++;
+} 
 
 	
   function leaveRoom() {

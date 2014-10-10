@@ -78,7 +78,12 @@ var keyState = input.getState();
 		$(target).data('down', false);
 	});
 	$(this).mouseup(function (event) {
-  		  mousePointer(2);
+  		  //描画面のマウスカーソルの変更
+		if(mousePointerFlag==2){
+			mousePointer(5);
+		}else{
+			mousePointer(2);
+		}
 	});	
     return this;
   }

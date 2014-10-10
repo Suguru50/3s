@@ -11,14 +11,13 @@
 <div id="video_info" class="L_slide_panel">
 <!--手書きチャット部分-->
 	<div class="panel_main L_main">
-		<p>VIDEO</p>
+		VIDEO
 		<div id="socketbox">
 			<!--h2>WebRTC</h2-->
 			<div id="buttonblock">
-				<button type="button" onclick="startVideo();">Start video</button>
-				<button type="button" onclick="stopVideo();">Stop video</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" onclick="connect();">Connect</button>
+				<div class="basebutton" onclick="startVideo();">Start video</div>
+				<div class="basebutton" onclick="stopVideo();">Stop video</div>
+				<div class="basebutton" onclick="connect();">Connect</div>
 				<!--button type="button" onclick="hangUp();">Hang Up</button-->
 				<br />
 			</div>
@@ -36,9 +35,9 @@
 	<div id="canvas_margin">
 		<canvas id="canvas_myCanvas1">
 		</canvas>
-		<canvas  id="canvas_myCanvas2">
+		<canvas id="canvas_myCanvas2">
 		</canvas>
-		<canvas  id="canvas_toolcanvas">
+		<canvas id="canvas_toolcanvas">
 		</canvas>
 		<div id="brushcatcher"></div>
 	</div>
@@ -48,10 +47,10 @@
 	<div id="text_roomArea">
 
 		<!--input type="button" id="text_leavebutton" style="padding:5px" value="退室" /-->
-		<div id="text_msg_list" style="height:100px; overflow:auto;">
+		<div id="text_msg_list" style="overflow:auto;">
 		</div>
 		<input type="text" class="text_text" style="width:60%; padding:5px" id="text_message"/>
-		<input type="button" id="text_sendbutton" style="padding:5px;" value="送信" disabled/>
+		<input type="button" id="text_sendbutton" style="padding:5px;" value="SEND" disabled/>
 	</div>
 </div><!-- chat end -->
 <div id="zoomInfo"></div>
@@ -64,11 +63,13 @@
 			<div class="canvas_paint_chat">
 				<div id="colorWheelContainer"></div>
 				<div id="toolButtonContainer">
-					<div id="toolbutton"><label for="tool_eraser"><img src="images/eraser.png" id="erasericon"/></label></div>
-					<div id="toolbutton"><input type="checkbox" name="eraser" id="tool_eraser" value="け"></div>
-					<div id="toolbutton"><label for="tool_airbrush"><img src="images/brush.png" id="brushicon"/></label></div>
-					<div id="toolbutton"><input type="checkbox" name="air" id="tool_airbrush" value="ブ"></div>
-					<input type="button" id="tool_clear" value="全">
+					<ul>
+						<li><div id="toolbutton"><label for="tool_eraser"><img src="images/eraser.png" id="erasericon"/></label></div>
+						<div id="toolbutton"><input type="checkbox" name="eraser" id="tool_eraser"></div></li>
+						<li id="list_airbrush"><div id="toolbutton"><label for="tool_airbrush"><img src="images/brush.png" id="brushicon"/></label></div>
+						<div id="toolbutton"><input type="checkbox" name="air" id="tool_airbrush"></div></li>
+						<li id="list_clear"><div id="tool_clear" class="basebutton">Layer Clear</div></li>
+					</ul>
 				</div>
 			</div>
 			<div id="sliderlabel">
@@ -89,33 +90,30 @@
 				</div>
 			</div>
 
-			<div id="layers">
-				<div id="button_horizontal_inner"><input type="button" value="○" id="viewLayer1" onClick="viewLayer(1)"></div>
-				<div id="button_horizontal_inner"><input type="button" value="Layer 1" id="layer1" onClick="changeLayer(1)" class="selected"></div>
-				<div id="button_horizontal_inner"><input type="button" value="○" id="viewLayer2" onClick="viewLayer(2)"></div>
-				<div id="button_horizontal_inner"><input type="button" value="Layer 2" id="layer2" onClick="changeLayer(2)"></div>
-			</div>
+			<ul id="layers">
+				<li><div id="button_horizontal_inner"><div id="viewLayer2" onClick="viewLayer(2)" class="layervisible visible">○</div>
+					<div id="layer2" onClick="changeLayer(2)" class="layerbutton">Layer 2</div></div></li>
+				<li><div id="button_horizontal_inner"><div id="viewLayer1" onClick="viewLayer(1)" class="layervisible visible">○</div>
+					<div id="layer1" onClick="changeLayer(1)" class="layerbutton selected">Layer 1</div></div></li>
+			</ul>
 
 			<canvas id="canvas_view"></canvas>
-			<div id="button_horizontal">
-				<div id="button_horizontal_inner"><input type="button" value="+" onClick="plus()"></div>
-				<div id="button_horizontal_inner"><input type="button" value="-" onClick="minus()"></div>
-				<div id="button_horizontal_inner"><input type="button" value="100%" onClick="zoomReset()"></div>
-			</div>	                    
+				<div id="plusbutton" class="basebutton" onClick="plus()">+</div>
+				<div id="minusbutton" class="basebutton" onClick="minus()">-</div>
+				<div id="samebutton" class="basebutton" onClick="zoomReset()">100%</div>
 		</div><!--tab1 end -->
 		<div id="tab2">
+			<div id="animeshadow" class="tabshadow"><div id="animeloading"><img id="animeloadimg" src="images/load.gif"><p>CREATING ANIMATION...</p></div></div>
 		<!--Animation area-->
-		<ul id="frame_list"><li><button id="addframe" type="button" onclick="addFrame()">フレーム追加</button><button id="" type="button" onclick="createAnimation()">アニメ化</button><button id="" onclick="switchAnimationMode()">フレーム選択モード</button></li>
-	 <li><div class="framewrapper"><div id="addimg1" class="frameadd">Add</div><div id="remove1" class="frameremove">×</div><canvas id="1_img" class="animeframe"></canvas><div class="framenumber">1</div></div></li>
-	 <li><div>アニメ出力結果.<img id="anim"></div></li></ul>
+<ul id="frame_list"><li><div id="addframe" class="animebutton" onclick="addFrame()">Add Frame</div><div id="excuteanime" class="animebutton" onclick="createAnimation()">Create!</div></li>
+	<li><div class="framewrapper"><div id="addimg1" class="frameadd" onclick="switchAnimationMode(1)">OK</div><div id="selectframe1" class="frameselect"onclick="switchAnimationMode(1)">SELECT</div><canvas id="1_img" class="animeframe"></canvas><div class="framenumber">1</div></div></li></ul>
+	 <div>ANIME<img id="anim"></div>
 
 		<!--Animation area end-->
 		</div>
 		<div id="tab3">
-			bbbbbbbb
 		</div>
 		<div id="tab4">
-			cccccccccc
 		</div>
 	</div>
 </div><!-- tool_info end -->

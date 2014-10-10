@@ -1,4 +1,66 @@
 @charset "utf-8";
+
+::-webkit-scrollbar{
+	-webkit-box-shadow: inset 0 0 6px rgba(60,60,60,0.8);
+    width: 12px;
+	height:12px;
+	background:#CCC;
+}
+
+::-webkit-scrollbar-corner {/*右下の同時に動かす奴*/
+	background:#999;
+}  
+::-webkit-scrollbar-thumb {/*中で動く棒*/
+    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+/*アニメーションさせたかったけどうまくいかず
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+	*/
+}
+::-webkit-scrollbar-thumb:hover {/*中で動く棒*/
+    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,1);
+	background:#FFF;
+}
+::-webkit-scrollbar-track /*棒が動く範囲*/{
+    border-radius: 10px;
+}
+
+#list_clear{
+	float:right;
+}
+
+#tool_clear{
+	width:100%;
+}
+
+#list_airbrush{
+	float:left;
+}
+
+#text_msg_list{
+	height:120px;
+}
+.text_msg{
+	margin:4px;
+	padding:5px;
+	-webkit-border-radius: 15px;  
+	-moz-border-radius: 15px;  
+	/*background:#7FFFD4;*/
+	background:
+		-webkit-gradient(linear, left top, left bottom, from(#FFF), color-stop(0.1,#CCFFFF), color-stop(0.3,#99FFFF),color-stop(0.9,#99FFFF), to(#98B7F0));
+	box-shadow:0px 2px 5px 0px #4682B4;
+	/*
+	 * 1:水平方向の影の距離
+	 * 2:垂直方向の影の距離
+	 * 3:ぼかし距離
+	 * 4:ひろがり距離
+	 * */
+}
 #chat {
 	position: absolute;
 	left: 0px;
@@ -7,7 +69,8 @@
 	height: 180px;
 	margin: 0 250px 0px 200px;
 	/*width:-webkit-calc(100% - 250px) ;*/
-	background: #00EBFF;
+	/*background: #FFFDD0;*/
+	background-image: url("../images/chatback.png");
 }
 
 #canvas_canvas {
@@ -38,9 +101,8 @@ html {
 body {
 	margin: 0;
 	height: 100%;
+	overflow:hidden;
 }
-
-
 
 article {
 	clear: both;
@@ -55,7 +117,6 @@ article {
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-
 	width: 200px;
 	height: 100%;
 	background: #555;
@@ -63,11 +124,10 @@ article {
 	float: left;
 }
 
-
 #text_roomArea {
 	margin: 10px 30px 0 30px;
 	padding: 0 10px 0 10px;
-	background: #FFFDD0;
+	background: rgba(0,0,0,0);
 }
 
 
@@ -102,11 +162,10 @@ article {
 	-webkit-transform: translate(450px,300px);
 	z-index: 97;
 }
-
 #canvas_toolcanvas{
 	position: absolute;
 	margin: -50px -200px 0 -200px;
-	opacity:0.5;
+	opacity:0.333;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
@@ -116,6 +175,7 @@ article {
 
 #colorWheelContainer{
 	width:230px;
+	position: relative;
 }
 
 /* range */
@@ -269,16 +329,60 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 }
 
 #layers{
-	width:230px;
+	width:80%;
 }
+
+.layerbutton{
+	cursor:default;
+	overflow:hidden;
+	background:#999;
+	border: 2px ridge #BBB;
+	-webkit-border-radius: 8px;
+	font-family:'title';
+	color:#555;
+	white-space: nowrap;
+}
+
+.layerbutton.selected{
+	background:
+		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
+		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+	color:#000;
+}
+
+.layervisible{
+	cursor:default;
+	overflow:hidden;
+	background:#999;
+	border: 2px ridge #BBB;
+	float:left;
+	-webkit-border-radius: 8px;
+	font-family:'title';
+	color:#AAA;
+}
+.layervisible.visible{
+	background:
+		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
+		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+	color:#000;
+}
+
+@font-face {
+  font-family: 'title';
+  src: url('/images/Chunkfive.otf');
+}
+
 #button_horizontal{
 	width:230px;
 }
+/*
 #button_horizontal_inner{
 	float:left;
 }
+*/
 
 #brushcatcher{
+	/*background:rgb(0,0,250);*/
 	opacity:0;
 	position:absolute;
 	top: 0px;
@@ -287,4 +391,35 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 	height: 101%; /*なぜか上下左右に1pxずれるので大きめにとった*/
 	/*-webkit-transform: translate(1000px,1000px);*/
 	z-index: 98;
+}
+
+#frame_list{
+	width:200px;
+}
+
+.basebutton{
+	text-align:center;
+	margin:2px;
+	cursor:default;
+	border: 2px ridge #bbb;
+	-webkit-border-radius: 8px;
+	color:#000;
+	font-family:'title';
+	white-space: nowrap;
+	font-size:16px;
+	/*display:inline-block;中の文字ピッタリに。考え中*/
+	background:
+		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
+		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+}
+
+#plusbutton{
+	width:20px;
+	float:left;
+}
+#minusbutton{
+	width:20px;
+}
+#samebutton{
+	width:50%;
 }

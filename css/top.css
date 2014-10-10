@@ -1,15 +1,44 @@
 #top{
-
-width:300px;
-height:200px;
-margin-left:auto;
-margin-right:auto;
-margin-top:100px;
-background:#fff;
-color:#999;
+	width:300px;
+	height:200px;
+	margin-left:auto;
+	margin-right:auto;
+	background:#fff;
+	color:#999;
+	padding-top:130px;
 }	
+
+#text_topRoomArea{
+}
+
 #testa{
-display: inline-block;
+	display: inline-block;
+}
+
+#loading p{
+	font-family: 'title';
+	src: url('/images/Chunkfive.otf');
+	color:#FFF;
+	font-size:400%;
+}
+
+#shadow{
+}
+
+#loadimg{
+	
+}
+
+#loading{
+	position: absolute;
+	text-align: center;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 500px;
+	height: 300px;
 }
 
 li{
@@ -59,5 +88,5 @@ margin-right:auto;
 
 #text_enterbutton{
 height: 80%;
-width: 200%;
+width: 100%;
 }

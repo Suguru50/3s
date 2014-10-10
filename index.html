@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+<link rel="icon" type="image/png" href="images/header_logo.png">
 <meta charset="utf-8">
 <title>Share 3S</title>
 <link href="css/room.css" rel="stylesheet" type="text/css">
@@ -10,7 +11,7 @@
 <link href="css/header.css" rel="stylesheet" type="text/css">
 <link href="css/tool.css" rel="stylesheet" type="text/css">
 <link href="css/anime.css" rel="stylesheet" type="text/css">
-
+<link href="css/video.css" rel="stylesheet" type="text/css">
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/jquery-2.0.0.min.js"></script>
 <script src="/js/socket.js"></script>
@@ -23,13 +24,16 @@
 <script src="/js/layer.js"></script>
 <script src="/js/tabmenu.js"></script>
 <script src="/js/animation.js"></script>
-
+<script type="text/javascript" src="/js/jsgif-master/LZWEncoder.js"></script>
+<script type="text/javascript" src="/js/jsgif-master/NeuQuant.js"></script>
+<script type="text/javascript" src="/js/jsgif-master/GIFEncoder.js"></script>
+<script type="text/javascript" src="/js/jsgif-master/b64.js"></script>
 
 
 </head>
 
 <body>
-	<div id="shadow"></div>
+<div id="shadow"><div id="loading"><img id="loadimg" src="images/load.gif"><p>PLEASE WAIT...</p></div></div>
 	<header>
 		<img src="images/header_logo.png" height="50" width="50">
 		<h1>Share 3S room: <span id="tool_roomName"></span></h1>

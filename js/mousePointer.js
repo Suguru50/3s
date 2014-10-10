@@ -1,29 +1,61 @@
+//描画用マウスカーソルの有無
+// 0:なし 1:サークル 2:選択範囲
+mousePointerFlag = 1;
+
+
+
 function mousePointer(pointer){
 	switch(pointer){
 		case 1:
 			//AUTO
-			if(!animationMode){
-				brushcatcher.style.cursor = "auto";
-			}
+			brushcatcher.style.cursor = "auto";
 			break;
 		case 2:
 			//DEFAULT
-			if(!animationMode){
-				brushcatcher.style.cursor = "default";
-			}
+			//brushcatcher.style.cursor = "default";
+			brushcatcher.style.cursor = "none";
+			mousePointerFlag = 1;
 			break;
 		case 3:
 			//CROSSHAIR
-			if(!animationMode){
-				brushcatcher.style.cursor = "crosshair";
-			}
+			brushcatcher.style.cursor = "crosshair";
+			mousePointerFlag = 0;
 			break;
 		case 4:
 			//MOVE
-			if(!animationMode){
-				brushcatcher.style.cursor = "move";
-			}
+			brushcatcher.style.cursor = "move";
+			mousePointerFlag = 0;
 			break;
+		case 5:
+			//SELECT
+			brushcatcher.style.cursor = "none";
+			mousePointerFlag = 2;
+			break;
+	}
+}
 
+function pointerCreate(x,y){
+	C_tc_c.canvas.width=C_tc_c.canvas.width;
+	if(!Cca_drawing){
+		switch(mousePointerFlag){
+			case 0:
+				break;
+			case 1:
+				//circle
+				C_tc_c.beginPath();
+				C_tc_c.arc(x,y,Cto_c.lineWidth/2,0,2*Math.PI,false);
+				C_tc_c.stroke();
+				break;
+			case 2:
+				//select
+			//	var selectSize = 100;
+				C_tc_c.beginPath();
+				//C_tc_c.strokeRect(x-selectSize,y-selectSize,selectSize*2,selectSize*2);
+				C_tc_c.strokeRect(x-ANIMATE_X/2,y-ANIMATE_Y/2,ANIMATE_X,ANIMATE_Y);
+				C_tc_c.strokeStyle="#000";
+				C_tc_c.globalAlpha = 1;
+				C_tc_c.stroke();
+				break;
+		}
 	}
 }

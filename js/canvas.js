@@ -1,7 +1,7 @@
 function canvasSetUp() {
 	//キャッチャーの位置調整
 	var	canvaswindow     = document.getElementById("canvas_canvas");
-	var	brushcatcher     = document.getElementById("brushcatcher");
+	brushcatcher     = document.getElementById("brushcatcher");
 	canvaswindow.onscroll = function(){
 		$("#brushcatcher").css("-webkit-transform","translate("+canvaswindow.scrollLeft+"px,"+
 													canvaswindow.scrollTop+"px");
@@ -48,22 +48,21 @@ function canvasSetUp() {
       Cca_oldPos = getPos(Cca_event);
 	  MouseDownFlg = true;
 	    //左クリックの処理
-		if(Cca_event.button==0){
-			if(!animationMode){
-				Cca_drawing = true;
-				Cca_brushInfomation.brushWidth = Cto_c.lineWidth;
-				Cca_brushInfomation.brushColor = Cto_c.strokeStyle;
-				Cca_brushInfomation.brushGlobalAlpha = Cto_c.globalAlpha;
-				Cca_brushInfomation.brushShadowColor = Cto_c.shadowColor;
-				Cca_brushInfomation.brushShadowBlur = Cto_c.shadowBlur;
-				Cca_brushInfomation.globalCompositeOperation = Cto_c.globalCompositeOperation;
-				//ブラシ用
-				Cca_brushInfomation.grad = getGrad();
-				Cca_brushInfomation.isBlur = tool.getAirBrushStatus();
-				Cca_brushInfomation.layerNum = currentLayer;
-			}else{
-				setFrame(Cca_event);
-			}
+		console.log("mousedown"+Cca_brushInfomation.layerNum);
+		if(Cca_event.button==0&&!animationMode){
+			Cca_drawing = true;
+			Cca_brushInfomation.brushWidth = Cto_c.lineWidth;
+			Cca_brushInfomation.brushColor = Cto_c.strokeStyle;
+			Cca_brushInfomation.brushGlobalAlpha = Cto_c.globalAlpha;
+			Cca_brushInfomation.brushShadowColor = Cto_c.shadowColor;
+			Cca_brushInfomation.brushShadowBlur = Cto_c.shadowBlur;
+			Cca_brushInfomation.globalCompositeOperation = Cto_c.globalCompositeOperation;
+			//ブラシ用
+			Cca_brushInfomation.grad = getGrad();
+			Cca_brushInfomation.isBlur = tool.getAirBrushStatus();
+			Cca_brushInfomation.layerNum = currentLayer;
+		}else if(animationMode){
+			setFrame(Cca_oldPos.x,Cca_oldPos.y);
 		}
 		//右クリックの処理
 	    if(Cca_event.button==2){
@@ -94,39 +93,28 @@ function canvasSetUp() {
 			Cto_c.lineTo(Cca_pos.x, Cca_pos.y);
 			Cto_c.stroke();
 			Cto_c.closePath();
-			/*
-        	Cto_lc1.beginPath();
-        	Cto_lc1.moveTo(Cca_oldPos.x, Cca_oldPos.y);
-			Cto_lc1.lineTo(Cca_pos.x, Cca_pos.y);
-			Cto_lc1.stroke();
-			Cto_lc1.closePath();
-        	Cto_lc2.beginPath();
-        	Cto_lc2.moveTo(Cca_oldPos.x, Cca_oldPos.y);
-			Cto_lc2.lineTo(Cca_pos.x, Cca_pos.y);
-			Cto_lc2.stroke();
-			Cto_lc2.closePath();
-			*/
 		  }
         // socket.IOサーバーに、
         // どの点からどの点までを描画するかをの情報を送付する
         Cso_socket.emit("draw", {start:Cca_oldPos, end:Cca_pos, info:Cca_brushInfomation});
         Cca_oldPos = Cca_pos;
-      }else if(animationMode){
-		  console.log("iuiiiiiiiiiiiiiiiiiiiiiiiiiii");
-		  toolMoveCursor(Cca_event);
-	  }
+      }
 	  //左クリックの処理
 	  if(Cca_event.button==2){
           Cca_oldPos = Cca_pos;
 		  tool.colorWheel.toolSpuit(Cca_oldPos.x, Cca_oldPos.y);
 		  mousePointer(3);
 	  }
+	  
+	  //マウスカーソル変更（重いんだよなぁ）
+	  pointerCreate(Cca_pos.x,Cca_pos.y);
+	  
     }, false);
     brushcatcher.addEventListener("mouseout", function () {
 	  Cca_drawing = false;
     }, false);
 	
-	Cto_canvas.addEventListener("contextmenu" , function(e){
+	brushcatcher.addEventListener("contextmenu" , function(e){
 		if(e.preventDefault){
 			// デフォルトの動作を無効化する
 			e.preventDefault();
@@ -180,6 +168,7 @@ function canvasSetUp() {
 
 	  Cso_socket.on("log",function (log){
 		var img = new Image();
+		console.log(log.log);
 		img.src = log.log;
 		img.onload = function(){
 			Cto_c.drawImage(img,0,0,2000,2000);
@@ -189,6 +178,8 @@ function canvasSetUp() {
 
 	  function drawLine(Cto_brushInfomation){
 		var oncontext = eval("Cto_lc"+Cto_brushInfomation.info.layerNum+";");
+		console.dir(oncontext);
+		console.log("Cto_layercanvas"+Cto_brushInfomation.info.layerNum+";");
 		oncontext.save();
 		if(Cto_brushInfomation.info.isBlur){
 			var cutR = parseInt((Cto_brushInfomation.info.brushColor).substring(1,3),16);
