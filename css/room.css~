@@ -146,8 +146,6 @@ article {
 	margin: -50px -200px 0 -200px;
 	background: red;
 	vertical-align: bottom;
-	width: 2000px;
-	height: 2000px;
 	-webkit-transform: translate(450px,300px)
 }
 
