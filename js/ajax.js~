@@ -34,8 +34,7 @@ function enterAjax() {
 		url: 'enter.html',
 		dataType: 'html',
 		success: function(data) {
-			//$('article').html(data);
-			$("#article_body").html(data);
+			$('article').html(data);
 			enterRoomSetUp();
 		},error:function() {
 			alert('error');

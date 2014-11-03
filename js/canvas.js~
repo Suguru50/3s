@@ -178,6 +178,8 @@ function canvasSetUp() {
 
 	  function drawLine(Cto_brushInfomation){
 		var oncontext = eval("Cto_lc"+Cto_brushInfomation.info.layerNum+";");
+		console.dir(oncontext);
+		console.log("Cto_layercanvas"+Cto_brushInfomation.info.layerNum+";");
 		oncontext.save();
 		if(Cto_brushInfomation.info.isBlur){
 			var cutR = parseInt((Cto_brushInfomation.info.brushColor).substring(1,3),16);

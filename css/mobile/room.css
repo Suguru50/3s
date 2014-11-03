@@ -30,7 +30,6 @@
     border-radius: 10px;
 }
 
-
 #list_clear{
 	float:right;
 }
@@ -57,7 +56,7 @@
 	box-shadow:0px 2px 5px 0px #4682B4;
 	/*
 	 * 1:水平方向の影の距離
-	 * 2:垂直方向の影の距離
+	 * 2:垂直方向rtの影の距離
 	 * 3:ぼかし距離
 	 * 4:ひろがり距離
 	 * */
@@ -65,13 +64,10 @@
 
 #chat {
 	position: absolute;
-	left: 0px;
-	right: 0px;
+	left: 5%;
+	right: 5%;
 	bottom: 20px;
-	margin: 0 280px 0px 280px;
-	/*width:-webkit-calc(100% - 250px) ;*/
-	/*background: #FFFDD0;*/
-	background-image: url("../images/chatback.png");
+	background-image: url("../../images/chatback.png");
 	z-index:150;
 }
 
@@ -116,8 +112,7 @@ body {
 article {
 	clear: both;
 	position: relative;
-	height:-webkit-calc(100% - 50px) ;
-
+	min-height:inherit;/*jquery mobileによってarticleの外に独自の要素が自動的に追加されるので高さをそれにあわせる*/
 }
 
 .toggleR {
@@ -147,6 +142,8 @@ article {
 }
 
 .slideLOuter{
+	display:none;
+	/*
 	position: absolute;
 	background: rgba(150,150,150,0.5);
 	box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.4);
@@ -159,8 +156,11 @@ article {
 	float: left;
 	z-index:150;
 	height: auto;
+	*/
 }
 .slideROuter{
+	display:none;
+	/*
 	top:0px;
 	bottom:0px;
 	right:0px;
@@ -171,6 +171,7 @@ article {
 	width:250px;
 	z-index:150;
 	height: auto;
+	*/
 }
 
 .slidehidden{
@@ -504,14 +505,30 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 #samebutton{
 	width:50%;
 }
-
-#smartmenu{
-	display:none;
-}
-#panelR{
-	display:none;
-}
-#panelL{
-	display:none;
+.pcmenu{
+	display:none !important; 
 }
 
+.ui-content{
+	overflow:hidden;
+	padding: 0 !important;
+	margin: 0;
+	float: right;
+}
+
+#openmenu{
+	height: 50px;
+	padding: 0;
+	margin: 0;
+}
+
+#header_info{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+.header_left{
+	float:left;
+}

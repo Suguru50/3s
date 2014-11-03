@@ -1,3 +1,4 @@
+
 <script src="/js/dragscroll.js"></script>
 <script src="/js/rangesize.js"></script>
 <script src="js/zoom.js"></script>
@@ -6,29 +7,10 @@
 <script src="js/connect.js"></script>
 <script src="js/mousePointer.js"></script>
 <script src="js/slidemenu.js"></script>
-    <script type="text/javascript">
-	function initialize() {
-	  //var place = new google.maps.LatLng(35.6270374,139.342189);
-	  var place = new google.maps.LatLng(42.345573,-71.098326);
-	  var mapOptions = {
-		center: place,
-		zoom: 14,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	  };
-	  var map = new google.maps.Map(document.getElementById("canvas_eventCanvas"),
-		mapOptions);
-	  var panoramaOptions = {
-		position:place,
-		pov: {
-			heading:34,
-			pitch:10
-		}
-	  };
-	}
-    </script>
 
-<style>
-</style>
+
+<div class="slideLOuter">
+<div class="toggleL toggleButton">○</div>
 <div id="video_info" class="L_slide_panel">
 <!--手書きチャット部分-->
 	<div class="panel_main L_main">
@@ -48,14 +30,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="menu_off left"></div>
 </div><!-- video_info end -->
+</div>
 
 
 <div id="canvas_canvas" tabindex="1">
 	<div id="canvas_margin">
-		<canvas id="canvas_eventCanvas">
-		</canvas>
+		<div id="canvas_eventCanvas" >
+		</div>
 		<canvas id="canvas_myCanvas1">
 		</canvas>
 		<canvas id="canvas_myCanvas2">
@@ -77,9 +59,11 @@
 	</div>
 </div><!-- chat end -->
 <div id="zoomInfo"></div>
+<div class="slideROuter">
+<div class="toggleR toggleButton">○</div>
 <div id="tool_info" class="R_slide_panel">
 <!--手書きチャット部分-->
-<div class="menu_off right"></div>
+<!--div class="menu_off right">亡骸</div-->
 <div class="panel_main R_main">
 	<div id="tabs">
 		<div id="tab1">
@@ -135,11 +119,18 @@
 		<!--Animation area end-->
 		</div>
 		<div id="tab3">
-			<button id="testmap" value="test" onclick="initialize()">
+			<button id="testmap" value="test" onclick="viewMap()">map表示</button>
+			<button id="mapplus">map+</button>
+			<button id="mapminus">map-</button>
+			<button id="mapup">map↑</button>
+			<button id="mapdown">map↓</button>
+			<button id="mapright">map→</button>
+			<button id="mapleft">map←</button>
 		</div>
 		<div id="tab4">
 		</div>
 	</div>
 </div><!-- tool_info end -->
+</div>
 
 

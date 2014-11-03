@@ -2,18 +2,40 @@
 <html>
 <head>
 <link rel="icon" type="image/png" href="images/header_logo.png">
-<meta charset="utf-8">
+<meta name="viewport" 
+content="width=device-width,
+ initial-scale=1,
+ maximum-scale=1, 
+ user-scalable=no" >
 <title>Share 3S</title>
-<link href="css/room.css" rel="stylesheet" type="text/css">
+<!--link href="css/room.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <link href="css/top.css" rel="stylesheet" type="text/css">
 <link href="css/slidemenu.css" rel="stylesheet" type="text/css">
 <link href="css/header.css" rel="stylesheet" type="text/css">
 <link href="css/tool.css" rel="stylesheet" type="text/css">
 <link href="css/anime.css" rel="stylesheet" type="text/css">
-<link href="css/video.css" rel="stylesheet" type="text/css">
+<link href="css/video.css" rel="stylesheet" type="text/css"-->
+
+<script src="js/jquery-2.0.0.min.js"></script>
+<script>
+(function(){
+	var _UA = navigator.userAgent;
+	if (_UA.indexOf('iPhone') > 0 || _UA.indexOf('iPod') > 0 || _UA.indexOf('Android') > 0) {
+		document.write('<link href="css/mobile/top.css" rel="stylesheet" type="text/css">');
+		document.write('<link href="css/mobile/header.css" rel="stylesheet" type="text/css">');
+		document.write('<link href="css/mobile/room.css" rel="stylesheet" type="text/css">');
+		document.write("<script type='text/javascript' src='js/mobile/jquery.mobile-1.4.4.min.js'><"+"/script>");
+		document.write("<link href='css/mobile/jquery.mobile.structure-1.4.4.css' rel='stylesheet' type='text/css'>");
+		console.log("スマートフォンデシタ");
+
+	}else{
+		document.write('<link href="css/room.css" rel="stylesheet" type="text/css"><link href="css/style.css" rel="stylesheet" type="text/css"><link href="css/top.css" rel="stylesheet" type="text/css"><link href="css/slidemenu.css" rel="stylesheet" type="text/css"><link href="css/header.css" rel="stylesheet" type="text/css"><link href="css/tool.css" rel="stylesheet" type="text/css"><link href="css/anime.css" rel="stylesheet" type="text/css"><link href="css/video.css" rel="stylesheet" type="text/css">');
+	}
+})();
+</script>
+
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/jquery-2.0.0.min.js"></script>
 <script src="/js/socket.js"></script>
 <script src="/js/textchat.js"></script>
 <script src="/js/brushInfomation.js"></script>
@@ -35,17 +57,42 @@
 
 <body>
 <div id="shadow"><div id="loading"><img id="loadimg" src="images/load.gif"><p>PLEASE WAIT...</p></div></div>
+
+
 	<header>
-		<img src="images/header_logo.png" height="50" width="50">
-		<h1>Share 3S room: <span id="tool_roomName"></span></h1>
+		<div id="smartmenu" class="header_left">
+			<div role="main" class="ui-content">
+				<!--2パネルを開くためのリンクボタン-->
+				<a href="#panelL" id="openmenu" class="ui-btn ui-icon-info ui-btn-icon-left ico-menu"><img src="images/video.png" lat="video"></a>
+			</div>
+		</div>
+		<div id="header_info">
+			<img src="images/header_logo.png" height="50" width="50">
+			<h1>room: <span id="tool_roomName"></span></h1>
+		</div>
 		<ul id="tablist">
-			<li id="tablabel1" class="selected">Tool</li><!-- LOCK -->
-			<li id="tablabel2">Anime</li><!-- KICK -->
-			<li id="tablabel3">Sub</li><!-- SHARE -->
-			<li id="tablabel4">menu</li><!-- SHARE -->
+		<div id="smartmenu" class="header_right">
+			<div role="main" class="ui-content">
+				<!--2パネルを開くためのリンクボタン-->
+				<a href="#panelR" id="openmenu" class="ui-btn ui-icon-info ui-btn-icon-left ico-menu"><img src="images/maps.png" lat="maps"></a>
+			</div>
+		</div>
+			<li id="tablabel1" class="pcmenu selected">Tool</li>
+			<li id="tablabel2" class="pcmenu">Anime</li>
+			<li id="tablabel3" class="pcmenu">Sub</li>
+			<li id="tablabel4" class="pcmenu">menu</li>
 		</ul>
 	</header>
 	<article>
+		  <!--1パネル領域を定義-->
+<div id="panelR" data-role="panel" data-display="overlay" data-position="right">
+    <h3>みぎのぺーじ</h3>
+</div>
+<div id="panelL" data-role="panel" data-display="overlay" data-position="left">
+    <h3>ひだりのぺーじ</h3>
+</div>
+		<div id="article_body">
+		</div>
 	</article>
 	<footer>
 	</footer>

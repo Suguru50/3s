@@ -1,8 +1,8 @@
 //①テキストチャットの受け取りと発信
 //  var Cso_socket = io.connect(); //リモート環境？
-  //var Cso_socket = io.connect('http://localhost:3000'); //ローカル
+  var Cso_socket = io.connect('http://localhost:3000'); //ローカル
   //var Cso_socket = io.connect('http://172.16.73.57:3000'); //学校用
-  var Cso_socket = io.connect('http://210.152.156.143:3000'); 
+  //var Cso_socket = io.connect('http://210.152.156.143:3000'); 
   var Cso_userName;
 
   //サーバから受け取るイベント
@@ -54,7 +54,7 @@
   */
   //jqueryでメッセージを追加
   var msgcnt = 0;
-  function addMessage (Cso_value,Cso_color,Cso_size) {
+function addMessage (Cso_value,Cso_color,Cso_size) {
 	var Cso_msg = Cso_value.replace( /[!@$%<>'"&|]/g, '' ); //タグ記号とかいくつか削除
 	$("#text_msg_list").prepend("<div id='msg"+msgcnt+"' class='text_msg' style='opacity:0;'>" + Cso_msg + "</div>");
 	$("#msg"+msgcnt).animate({
@@ -63,11 +63,19 @@
 	msgcnt++;
 } 
 
+function addInfoMessage (Cso_value,Cso_color,Cso_size) {
+	var Cso_msg = Cso_value.replace( /[!@$%<>'"&|]/g, '' ); //タグ記号とかいくつか削除
+	$("#text_msg_list").prepend("<div id='msg"+msgcnt+"' class='text_msg' style='opacity:0;color:"+Cso_color+"'>" + Cso_msg + "</div>");
+	$("#msg"+msgcnt).animate({
+		opacity:"1"
+	},400);
+	msgcnt++;
+}
 	
-  function leaveRoom() {
-	console.log("退室ボタン");
-	Cso_socket.emit("leave", {user:Cso_userName}); 
-  }
+function leaveRoom() {
+console.log("退室ボタン");
+Cso_socket.emit("leave", {user:Cso_userName}); 
+}
 
 //----②-------
 

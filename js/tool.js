@@ -14,19 +14,22 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 
 	this.pageSize = 1;
 	this.canvas = canvas;
+	this.c_context = context;
     // 色や太さを選択した場合の処理
     // 選択した結果を、this.canvasに設定
 	this.colorWheel = new ColorWheel();//インスタンスをつくってる。AAMInterface.jsにあった。40行目くらい
-	this.colorWheel.wheelInit(document.getElementById("colorWheelContainer"), 200, 200,context);
+	this.colorWheel.wheelInit(document.getElementById("colorWheelContainer"), 200, 200,this.c_context);
 	this.colorWheel.pickerInit(document.getElementById("colorWheelContainer"));
 	
 	$("#tool_eraser").click(function () {
-		if(context.globalCompositeOperation === "source-over"){
-	  		context.globalCompositeOperation = "destination-out";
-		}else if(context.globalCompositeOperation === "destination-out"){
-	  		context.globalCompositeOperation = "source-over";
+		this.canvas = getCurrentCanvas();
+		this.c_context = getCurrentContext();
+		if(this.c_context.globalCompositeOperation === "source-over"){
+	  		this.c_context.globalCompositeOperation = "destination-out";
+		}else if(this.c_context.globalCompositeOperation === "destination-out"){
+	  		this.c_context.globalCompositeOperation = "source-over";
 		}
-	});
+	}.bind(this));
 
     $("#tool_clear").click(function(){
 		if(confirm("消す？")){
@@ -92,6 +95,7 @@ Tool.prototype.getPageSize = function(){
 Tool.prototype.setPageSize = function(size){
 	this.pageSize = size;
 }
+
 //----②-------
 
 

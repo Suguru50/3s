@@ -5,25 +5,21 @@ header {
 	display: none;
 }
 header img {
-	float: left;
+	float:left;
 }
 header h1 {
 	float: left;
-	font-size: 20px;
-	width: 300px;
 	color: #fff;
 	margin: 0;
+	line-height:50px;
 }
 header ul {
 	position: relative;
-	display:table;
-	width: 235px;	
 	margin: 0 0 0 auto;
 	z-index: 10000;
 	font-weight: bold;
 	color:white;
 	text-align:center;
-	table-layout: fixed;
 }
 
 header li {
@@ -79,24 +75,24 @@ ul #tablabel4{
 
 header h1{
 	font-family:'title';
-	font-size:24px;
+	font-size:18px;
 }
 
-/*
-.header_lock {
-	background: url(../images/lock.png);
-}
-.header_kick {
-	background: url(../images/kick.png);
-}
-.header_share {
-	background: url(../images/share.png);
-}
-*/
 .header_logout {
 	background: url(../images/logout.png);
 }
 @font-face {
   font-family: 'title';
   src: url('/images/Chunkfive.otf');
+}
+
+#tablist{
+	line-height:50px;
+	right:10px;
+	padding:0px;
+	margin:0px;
+}
+
+#panel{
+	background:#FFF;
 }

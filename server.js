@@ -243,10 +243,14 @@ function isNull(Sso_data){
 //--------⑤---------
   
 //⑥RTCシグナリング用？実験中
-  Sso_socket.on('message', function(message) {
-    broadcastToRoom(getEnteringRoomName(Sso_socket),'message', message);
-  });
+	Sso_socket.on('message', function(message) {
+	  broadcastToRoom(getEnteringRoomName(Sso_socket),
+		  'message', message);
+	});
 //--------------⑥-----------
+	Sso_socket.on("mapData",function(llData){
+		  broadcastToRoom(getEnteringRoomName(Sso_socket),
+			  'mapViewData',llData);
+	});
 });
-
 

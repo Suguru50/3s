@@ -1,0 +1,16 @@
+.text_msg{
+	font-size:large;
+}
+input[type=checkbox] {
+	display:none;
+}
+
+#tool_info{
+	overflow: auto;	
+}
+/*
+.canvas_canvas {
+	width:450px; height:400px; border:1px solid #ccc;}
+.canvas_canvas canvas {width:450px; height:400px;}
+*/
+
