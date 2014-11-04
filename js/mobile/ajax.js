@@ -34,8 +34,12 @@ function enterAjax() {
 		url: 'enter.html',
 		dataType: 'html',
 		success: function(data) {
-			$('article').html(data);
+			//$('article').html(data);
+			$("#article_body").html(data);
 			enterRoomSetUp();
+			var h = $("article").height();
+			h-=50;
+			$("article").css("min-height",h);
 		},error:function() {
 			alert('error');
 		}

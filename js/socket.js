@@ -1,8 +1,9 @@
 //①テキストチャットの受け取りと発信
 //  var Cso_socket = io.connect(); //リモート環境？
-  //var Cso_socket = io.connect('http://localhost:3000'); //ローカル
+  var Cso_socket = io.connect('http://localhost:3000'); //ローカル
+  //var Cso_socket = io.connect('http://10.0.2.2:3000'); //ローカル
   //var Cso_socket = io.connect('http://172.16.73.57:3000'); //学校用
-  var Cso_socket = io.connect('http://210.152.156.188:3000'); 
+  //var Cso_socket = io.connect('http://210.152.156.188:3000'); 
   var Cso_userName;
 
   //サーバから受け取るイベント
