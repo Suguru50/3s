@@ -3,7 +3,6 @@ var Cto_layercanvas1;
 var Cto_layercanvas2;
 var Cto_c;
 var tool;
-var tab;
 var textChat;
 var tabColorArray = ["#2e8b57","#ff8c00","ff6374","4682b4"];
 function getCurrentCanvas(){
@@ -85,7 +84,7 @@ function ajaxEnter(){
 		opacity:0
 	},300,function(){
 		$("#shadow").css('display', 'block').animate({
-			opacity:'0'
+			opacity:'1'
 		},200,function(){
 			$("header").css("display","block");
 			$.ajax({
@@ -128,10 +127,13 @@ function ajaxEnter(){
 					
 					Cto_cv = document.getElementById('canvas_view');
 					Cto_cvc = Cto_cv.getContext('2d');
+					Cto_cva = document.getElementById('canvas_view_area');
+					Cto_cva.height = 180;
+					Cto_cva.width = 180;
+					Cto_cvca = Cto_cva.getContext('2d');
 					//toolSetUp();
 					tool = new Tool();
 					tool.toolSetUp(Cto_canvas,Cto_c);
-					tab = new TabMenu(document.getElementById("tablist"),tabColorArray);
 					textChat = new TextChat();
 					textChat.textChatSetUp();
 
@@ -140,6 +142,7 @@ function ajaxEnter(){
 					//textChatSetUp();
 					leaveButtonSetUp();
 					enterRoom(Cso_msg,Cso_user);
+					flatpanelSetup();
 				},error:function() {
 					alert('error');
 				}

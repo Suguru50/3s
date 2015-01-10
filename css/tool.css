@@ -1,22 +1,25 @@
 #tool_info {
-	position: absolute;
+	/* position: absolute; */
 	top:0;
-	bottom:0;
+	bottom: 0;
 	margin-top:20px;
-	margin-bottom:25px;
-	margin-right:20px;
-	width: 220px;
-	height:auto;
+	margin-bottom: 20px;
+	margin-right:0px;
+	width: 500px;
+	height:-webkit-calc(100% - 20px);
 	/*background: #555;*/
 	/*background: #2e8b57;*/
 	background: rgba(255,255,255,0.3);
-	float: right;
-	box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.4);
+	box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.3);
 	z-index:150;
+	overflow:hidden;
 }
 
 #tabs{
+	display:table-cell;
 	height:100%;
+	float:right;
+	/* position:relative; */
 }
 
 
@@ -24,9 +27,9 @@
 
 	/*background-color:#2e8b57!important;*/
 	background:rgba(46,139,87,0.3) !important;
-
-	height:100%;
-	overflow-y:auto;
+	overflow:scroll;
+	width:100%;
+	height:-webkit-calc(100% - 20px);
 }
 #tab2{
 /*	background-color:#ff8c00!important;*/
@@ -45,6 +48,7 @@
 	color:white;
 	opacity:0;
 	display:none;
+	overflow:scroll;
 }
 #tab4{
 	background:rgba(70,130,180,0.3) !important;
@@ -53,6 +57,12 @@
 	opacity:0;
 	display:none;
 }
+#tab5{
+	background:rgba(70,130,180,0.3) !important;
+	height:100%;
+	color:white;
+	opacity:0;
+	display:none;
 @font-face {
   font-family: 'title';
   src: url('/images/Chunkfive.otf');

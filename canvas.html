@@ -1,136 +1,210 @@
-
 <script src="/js/dragscroll.js"></script>
 <script src="/js/rangesize.js"></script>
 <script src="js/zoom.js"></script>
 <script src="js/AAMUtils.js"></script>
 <script src="js/AAMInterface.js"></script>
 <script src="js/connect.js"></script>
+<script src="js/socket.js"></script>
 <script src="js/mousePointer.js"></script>
 <script src="js/slidemenu.js"></script>
-
-
 <div class="slideLOuter">
-<div class="toggleL toggleButton">○</div>
-<div id="video_info" class="L_slide_panel">
-<!--手書きチャット部分-->
-	<div class="panel_main L_main">
-		VIDEO
-		<div id="socketbox">
-			<!--h2>WebRTC</h2-->
-			<div id="buttonblock">
-				<div class="basebutton" onclick="startVideo();">Start video</div>
-				<div class="basebutton" onclick="stopVideo();">Stop video</div>
-				<div class="basebutton" onclick="connect();">Connect</div>
-				<!--button type="button" onclick="hangUp();">Hang Up</button-->
-				<br />
+	<div id="video_info" class="L_slide_panel">
+		<div class="panel_main L_main">
+			<div id="menubarL" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton"></div>
+				<div id="socketbox">
+					<!--h2>WebRTC</h2-->
+					<div id="buttonblock">
+						<div id="startVideo" class="basebutton" onclick="startVideo();">Start video</div>
+						<div id="stopVideo" class="basebutton" onclick="stopVideo();">Stop video</div>
+						<div id="Connect" class="basebutton" onclick="call();">Connect</div>
+						<div id="startCapture" class="basebutton">Start capture</div>
+						<!--button type="button" onclick="hangUp();">Hang Up</button-->
+						<br />
+					</div>
+					<div id="videoBlock">
+						<video id="local-video" class="webvideo" autoplay ></video>
+						<video id="webrtc-remote-video-0" class="webvideo" autoplay ></video>
+						<video id="webrtc-remote-video-1" class="webvideo" autoplay></video>
+						<video id="webrtc-remote-video-2" class="webvideo" autoplay></video>
+					</div>
+				</div>
 			</div>
-			<div id="videoBlock">
-				<video id="local-video" autoplay ></video>
-				<video id="remote-video" autoplay ></video>
-			</div>
-		</div>
+		</div><!-- video_info end -->
 	</div>
-</div><!-- video_info end -->
 </div>
 
 
 <div id="canvas_canvas" tabindex="1">
 	<div id="canvas_margin">
-		<div id="canvas_eventCanvas" >
+		<div id="zoomArea">
+			<div id="canvas_eventCanvas" ></div>
+			<canvas id="canvas_myCanvas1"></canvas>
+			<canvas id="canvas_myCanvas2"></canvas>
+			<canvas id="canvas_toolcanvas"></canvas>
 		</div>
-		<canvas id="canvas_myCanvas1">
-		</canvas>
-		<canvas id="canvas_myCanvas2">
-		</canvas>
-		<canvas id="canvas_toolcanvas">
-		</canvas>
 		<div id="brushcatcher"></div>
 	</div>
 </div>
 
 <div id="chat">
 	<div id="text_roomArea">
-
 		<!--input type="button" id="text_leavebutton" style="padding:5px" value="退室" /-->
-		<div id="text_msg_list" style="overflow:auto;">
-		</div>
+		<div id="text_msg_list" style="overflow:auto;"></div>
 		<input type="text" class="text_text" style="width:60%; padding:5px" id="text_message"/>
 		<input type="button" id="text_sendbutton" style="padding:5px;" value="SEND" disabled/>
 	</div>
 </div><!-- chat end -->
 <div id="zoomInfo"></div>
-<div class="slideROuter">
-<div class="toggleR toggleButton">○</div>
-<div id="tool_info" class="R_slide_panel">
-<!--手書きチャット部分-->
-<!--div class="menu_off right">亡骸</div-->
-<div class="panel_main R_main">
-	<div id="tabs">
-		<div id="tab1">
-			<div class="canvas_paint_chat">
-				<div id="colorWheelContainer"></div>
-				<div id="toolButtonContainer">
-					<ul>
-						<li><div id="toolbutton"><label for="tool_eraser"><img src="images/eraser.png" id="erasericon"/></label></div>
-						<div id="toolbutton"><input type="checkbox" name="eraser" id="tool_eraser"></div></li>
-						<li id="list_airbrush"><div id="toolbutton"><label for="tool_airbrush"><img src="images/brush.png" id="brushicon"/></label></div>
-						<div id="toolbutton"><input type="checkbox" name="air" id="tool_airbrush"></div></li>
-						<li id="list_clear"><div id="tool_clear" class="basebutton">Layer Clear</div></li>
-					</ul>
-				</div>
+<div class="slideROuter" style="display:none">
+	<div id="tool_info" class="R_slide_panel">
+		<div class="panel_main R_main">
+			<div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleR toggleButton"></div>
+		</div>
+	</div>
+</div>
+	<div id="flatpanel">
+		<div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton"></div>
+		<ul id="flatlist">
+			<li id="flatrow1" class="flatrow" value="0">
+			<div id="flatcell1" class="flatcell"><div id="content1" class="flatcontent">
+
+					<div class="canvas_paint_chat">
+						<div id="colorWheelContainer"></div>
+						<div id="toolButtonContainer"></div>
+					</div>
+
+            </div>
+            <div id="flat1" class="flatbutton" value="1"></div></div>
+			<div id="flatcell2" class="flatcell"><div id="content2" class="flatcontent">
+										<div id="flateraser"></div>
+            	<label for="tool_eraser">
+            	<p id="e_onbutton">ON</p> 
+                <input type="checkbox" name="eraser" id="tool_eraser">
+           		</label>
+				<label for="tool_eraser2">
+                <p id="e_offbutton">OFF</p>
+                <input type="checkbox" name="eraser" id="tool_eraser2">
+                </label>
+
+            </div>
+            <div id="flat2" class="flatbutton" value="2"></div></div>
+            </li>
+            <li id="flatrow2" class="flatrow" value="1">
+			<div id="flatcell3" class="flatcell"><div id="content3" class="flatcontent">
+					<div id="sliderlabel" style="transform:rotate(270deg)">
+							<div id="tool_slider">
+								<input class="tool_bar" type="range" id="tool_range_alpha" value="1" onchange="tool_alpha()" onmousemove="tool_alpha()" 
+									max="1" min="0" step="0.01">
+								<output id="tool_alpha_value"></output>
+							</div>
+						</div>
 			</div>
-			<div id="sliderlabel">
-				<img src="images/brushsize.png" id="brushsizeicon"/>
-				<div id="tool_slider">
-					<input class="tool_bar" type="range" id="tool_rangeinput" value="5" onchange="tool_bs()" onmousemove="tool_bs()" 
+            <div id="flat3" class="flatbutton" value="1"></div></div>
+			<div id="flatcell4" class="flatcell"><div id="content4" class="flatcontent">
+            		<div id="sliderlabel" style="transform:rotate(270deg)">
+							<div id="tool_slider">
+								<input class="tool_bar" type="range" id="tool_rangeinput" value="5" onchange="tool_bs()" onmousemove="tool_bs()" 
 						max="100" min="1">
 					<output id="tool_rangevalue">5</output>
 				</div>
 			</div>
-			
-			<div id="sliderlabel">
-				<img src="images/alpha.png" id="alphaicon"/>
-				<div id="tool_slider">
-					<input class="tool_bar" type="range" id="tool_range_alpha" value="1" onchange="tool_alpha()" onmousemove="tool_alpha()" 
-						max="1" min="0" step="0.01">
-					<output id="tool_alpha_value"></output>
+            </div>
+            <div id="flat4" class="flatbutton" value="2"></div></div>
+            </li>
+			<li id="flatrow3" class="flatrow" value="2">
+				<div id="flatcell5" class="flatcell"><div id="content5" class="flatcontent">
+					<form name="textStampForm" id="id_textStampForm" action="">
+						<input name="textStamp" id="id_textStamp" type="text" value="">
+						<input name="textSize" id="id_textSize" type="number" value="15" min="1">
+						<input name="textAlpha" id="id_textAlpha" type="number" value="1" max="1" min="0" step="0.01">
+						<input name="textLine" id="id_textLine1" 
+							type="radio" value="1" onClick="onChangeLine(1)" checked="checked">横書き
+						<input name="textLine" id="id_textLine2" type="radio" value="2" onClick="onChangeLine(2)">縦書き
+						<select name="textFont" id="id_textFont">
+							<option value="ＭＳ ゴシック">ＭＳ ゴシック</option>
+							<option value="ＭＳ Ｐゴシック">ＭＳ Ｐゴシック</option>
+							<option value="ＭＳ 明朝">ＭＳ 明朝</option>
+							<option value="ＭＳ Ｐ明朝">ＭＳ Ｐ明朝</option>
+							<option value="メイリオ">メイリオ</option>
+						</select>
+						<input type="button" value="Create" onclick="CreateStamp();" />
+					</form>		
 				</div>
+				<div id="flat5" class="flatbutton" value="1"></div></div>
+				<div id="flatcell6" class="flatcell"><div id="content6" class="flatcontent">
+					<div id="animeshadow" class="tabshadow"><div id="animeloading"><img id="animeloadimg" src="images/load.gif">
+									<p>CREATING ANIMATION...</p></div></div>
+					<ul id="frame_list"><li><div id="addframe" class="animebutton" onclick="addFrame()">Add Frame</div>
+											<div id="excuteanime" class="animebutton" onclick="createAnimation()">Create!</div></li>
+										<li><div class="framewrapper"><div id="addimg1" class="frameadd" onclick="switchAnimationMode(1)">OK</div>
+											<div id="selectframe1" class="frameselect"onclick="switchAnimationMode(1)">SELECT</div>
+											<canvas id="1_img" class="animeframe"></canvas>
+											<div class="framenumber">1</div></div></li></ul>
+					<div>ANIME<img id="anim"></div>
+				</div>
+				<div id="flat6" class="flatbutton" value="2"></div></div>
+			</li>
+			<li id="flatrow4" class="flatrow" value="3">
+				<div id="flatcell7" class="flatcell"><div id="content7" class="flatcontent">
+								<div id="flatairbrush"></div>
+            	<label for="tool_airbrush">
+            	<p id="air_onbutton">ON</p> 
+                <input type="checkbox" name="air" id="tool_airbrush">
+           		</label>
+				<label for="tool_airbrush2">
+                <p id="air_offbutton">OFF</p>
+                <input type="checkbox" name="air" id="tool_airbrush2">
+                </label>
 			</div>
-
-			<ul id="layers">
+				<div id="flat7" class="flatbutton" value="1"></div></div>
+				<div id="flatcell8" class="flatcell"><div id="content8" class="flatcontent">
+					<div id="view_p">
+						<canvas id="canvas_view"></canvas>
+						<canvas id="canvas_view_area"></canvas>
+					</div>
+					<div id="plusbutton" class="basebutton" onClick="plus()">+</div>
+			<div id="minusbutton" class="basebutton" onClick="minus()">-</div>
+			<div id="samebutton" class="basebutton" onClick="zoomReset()">100%</div>
+				</div>
+				<div id="flat8" class="flatbutton" value="2"></div></div>
+			</li>
+			<li id="flatrow5" class="flatrow" value="4">
+				<div id="flatcell9" class="flatcell"><div id="content9" class="flatcontent">
+								<ul id="layers">
 				<li><div id="button_horizontal_inner"><div id="viewLayer2" onClick="viewLayer(2)" class="layervisible visible">○</div>
 					<div id="layer2" onClick="changeLayer(2)" class="layerbutton">Layer 2</div></div></li>
 				<li><div id="button_horizontal_inner"><div id="viewLayer1" onClick="viewLayer(1)" class="layervisible visible">○</div>
 					<div id="layer1" onClick="changeLayer(1)" class="layerbutton selected">Layer 1</div></div></li>
 			</ul>
+				</div>
+				<div id="flat9" class="flatbutton" value="1"></div></div>
+				<div id="flatcell10" class="flatcell"><div id="content10" class="flatcontent">
+							<button id="testmap" value="test" onclick="viewMap()">map表示</button>
+			<div class="row">
+				<div class="cell"></div>
+				<div class="cell"><img id="key1 mapup" src="images/mapkey.png" ></div>
+				<div class="cell"></div>
+			</div>
+			<div class="row">
+				<div class="cell"><img id="key2 mapleft" src="images/mapkey.png" ></div>
+				<div class="cell">
+					<button id="mapplus">map+</button>
+					<button id="mapminus">map-</button>
+				</div>
+				<div class="cell"><img id="key3 mapright" src="images/mapkey.png" ></div>
+			</div>
+			<div class="row">
+				<div class="cell"></div>
+				<div class="cell"><img id="key4 mapdown" src="images/mapkey.png" ></div>
+				<div class="cell"></div>
+			</div>
 
-			<canvas id="canvas_view"></canvas>
-				<div id="plusbutton" class="basebutton" onClick="plus()">+</div>
-				<div id="minusbutton" class="basebutton" onClick="minus()">-</div>
-				<div id="samebutton" class="basebutton" onClick="zoomReset()">100%</div>
-		</div><!--tab1 end -->
-		<div id="tab2">
-			<div id="animeshadow" class="tabshadow"><div id="animeloading"><img id="animeloadimg" src="images/load.gif"><p>CREATING ANIMATION...</p></div></div>
-		<!--Animation area-->
-<ul id="frame_list"><li><div id="addframe" class="animebutton" onclick="addFrame()">Add Frame</div><div id="excuteanime" class="animebutton" onclick="createAnimation()">Create!</div></li>
-	<li><div class="framewrapper"><div id="addimg1" class="frameadd" onclick="switchAnimationMode(1)">OK</div><div id="selectframe1" class="frameselect"onclick="switchAnimationMode(1)">SELECT</div><canvas id="1_img" class="animeframe"></canvas><div class="framenumber">1</div></div></li></ul>
-	 <div>ANIME<img id="anim"></div>
 
-		<!--Animation area end-->
-		</div>
-		<div id="tab3">
-			<button id="testmap" value="test" onclick="viewMap()">map表示</button>
-			<button id="mapplus">map+</button>
-			<button id="mapminus">map-</button>
-			<button id="mapup">map↑</button>
-			<button id="mapdown">map↓</button>
-			<button id="mapright">map→</button>
-			<button id="mapleft">map←</button>
-		</div>
-		<div id="tab4">
-		</div>
+				</div>
+				<div id="flat10" class="flatbutton" value="2"></div></div>
+			</li>
+
+		</ul>
 	</div>
-</div><!-- tool_info end -->
-</div>
 
 

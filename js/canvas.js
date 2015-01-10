@@ -49,7 +49,7 @@ function canvasSetUp() {
 	  MouseDownFlg = true;
 	    //左クリックの処理
 		console.log("mousedown"+Cca_brushInfomation.layerNum);
-		if(Cca_event.button==0&&!animationMode){
+		if(Cca_event.button==0&&!animationMode&&!textstampMode){
 			Cca_drawing = true;
 			Cca_brushInfomation.brushWidth = Cto_c.lineWidth;
 			Cca_brushInfomation.brushColor = Cto_c.strokeStyle;
@@ -63,6 +63,9 @@ function canvasSetUp() {
 			Cca_brushInfomation.layerNum = currentLayer;
 		}else if(animationMode){
 			setFrame(Cca_oldPos.x,Cca_oldPos.y);
+		}else if(textstampMode){
+			putTextStamp(Cca_oldPos.x,Cca_oldPos.y); 
+			Cto_c.globalAlpha = Cca_brushInfomation.brushGlobalAlpha;
 		}
 		//右クリックの処理
 	    if(Cca_event.button==2){
@@ -72,7 +75,7 @@ function canvasSetUp() {
     brushcatcher.addEventListener("mouseup", function (Cca_event) {
 	  //canvasのpng保存
       Cca_drawing = false;
-	  view();
+	  view(scrollX(),scrollY());
 	  MouseDownFlg = false;
 	  //右クリックの処理
 		if(Cca_event.button==2){
@@ -150,7 +153,8 @@ function canvasSetUp() {
 			//console.debug("2行目→"+Cto_data.image.data);
 			img.onload = function(){
 				Cto_c.drawImage(img,0,0,2000,2000);
-				view();
+				view(scrollX(),scrollY());
+
 			};
 			img.src = Cto_data.image.data;
 		}
@@ -172,7 +176,7 @@ function canvasSetUp() {
 		img.src = log.log;
 		img.onload = function(){
 			Cto_c.drawImage(img,0,0,2000,2000);
-			view();
+			view(scrollX(),scrollY());
 		};
 	  });
 
@@ -193,7 +197,6 @@ function canvasSetUp() {
 			oncontext.arc(Cto_brushInfomation.end.x,Cto_brushInfomation.end.y,Cto_brushInfomation.info.brushWidth/2,0,Math.PI*2,false);
 			oncontext.fill();
 			oncontext.closePath();
-			console.dir(Cto_brushInfomation)
 		}else{
 			oncontext.strokeStyle = Cto_brushInfomation.info.brushColor;
 			oncontext.lineWidth = Cto_brushInfomation.info.brushWidth;
@@ -221,8 +224,11 @@ function canvasSetUp() {
 	
 	//キャンバスのスクロール初期値
 	//中心あたりを表示
-	canvaswindow.scrollTop = 1000;
-	canvaswindow.scrollLeft = 900;
+	var MAX_scrollX = canvaswindow.scrollWidth - document.getElementById("canvas_canvas").getBoundingClientRect().width;
+	var MAX_scrollY = canvaswindow.scrollHeight - document.getElementById("canvas_canvas").getBoundingClientRect().height;
+	canvaswindow.scrollTop = MAX_scrollY/2;
+	canvaswindow.scrollLeft = MAX_scrollX/2;
+
 
 	
 }

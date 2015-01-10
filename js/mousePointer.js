@@ -13,7 +13,7 @@ function mousePointer(pointer){
 		case 2:
 			//DEFAULT
 			//brushcatcher.style.cursor = "default";
-			brushcatcher.style.cursor = "none";
+			brushcatcher.style.cursor = "crosshair";
 			mousePointerFlag = 1;
 			break;
 		case 3:
@@ -30,6 +30,11 @@ function mousePointer(pointer){
 			//SELECT
 			brushcatcher.style.cursor = "none";
 			mousePointerFlag = 2;
+			break;
+		case 6:
+			//TEXT STAMP
+			brushcatcher.style.cursor = "none";
+			mousePointerFlag = 3;
 			break;
 	}
 }
@@ -56,6 +61,24 @@ function pointerCreate(x,y){
 				C_tc_c.globalAlpha = 1;
 				C_tc_c.stroke();
 				break;
+				
+			case 3:
+				//textStamp
+				C_tc_c.font = t_size+"px "+t_font;
+				//塗りつぶし
+				C_tc_c.fillStyle = Cto_c.strokeStyle;
+				
+				switch(t_line){
+				case 1 :
+					C_tc_c.fillText(t_stamp,x,y);
+					break;
+				case 2 :
+					lineChange(C_tc_c,t_stamp,x,y);
+					break;
+				}
+				C_tc_c.globalAlpha = t_alpha;
+				break;
 		}
 	}
 }
+

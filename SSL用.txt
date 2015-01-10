@@ -1,0 +1,10 @@
+﻿newkey.pen password:g011c1124
+country:JP
+State pr Province Name:Tokyo
+Locality:kougakuin
+organization name:kougakuin
+organization unit name:IS
+common Name:3S
+Email Address:
+A challenge password:g011c1124
+An optional company name:3S

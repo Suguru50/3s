@@ -2,14 +2,22 @@ body {
    margin:0px;
 	padding: 0;
 }
-.R_slide_panel .L_slide_panel{
-	position: absolute;
+.R_slide_panel{
 	margin: 0;	padding: 0 0 0 0;
-	/* ポイント：横幅指定とはみ出し非表示にする事で、横幅が0に近づいても文字の改行を押さえる(改行させない) */
+	 /*ポイント：横幅指定とはみ出し非表示にする事で、横幅が0に近づいても文字の改行を押さえる(改行させない) */
 	width:220px; 
 	height: 100%;
 	cursor: pointer;
-	overflow: hidden;	/* ←重要 */
+	overflow: hidden;	 /*←重要 */
+}
+.L_slide_panel{
+	position: absolute;
+	margin: 0;	padding: 0 0 0 0;
+	 /*ポイント：横幅指定とはみ出し非表示にする事で、横幅が0に近づいても文字の改行を押さえる(改行させない) */
+	width:220px; 
+	height: 100%;
+	cursor: pointer;
+	overflow: hidden;	 /*←重要 */
 }
 .R_slide_panel {
 	right:0px;
@@ -17,9 +25,11 @@ body {
 .L_slide_panel {
 	left:0px;
 }
+/*
 .R_slide_panel div,img,input,output,label {
 	overflow:hidden;
 }
+*/
 .L_slide_panel div,img,input,output,label {
 	overflow:hidden;
 }
@@ -65,7 +75,7 @@ body {
 	display:none;
 }
 .L_main{
-	width:180px;
+	width:220px;
 	float:left;
 }
 /*内容のcss*/	
@@ -75,7 +85,7 @@ body {
 	margin:0 0 0 5px; padding: 0 0 0 0;
 	padding:0;
 }
-	.panel_main li{
+	.panel_main  .bar li{
 		list-style: none;
 		display:block;
 	}
@@ -98,7 +108,7 @@ body {
 	display:inline-block;
 }
 .R_main{
+	display:table;
 	height:100%;
-	overflow:auto;
 }
 

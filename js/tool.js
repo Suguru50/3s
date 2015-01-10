@@ -20,15 +20,20 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 	this.colorWheel = new ColorWheel();//インスタンスをつくってる。AAMInterface.jsにあった。40行目くらい
 	this.colorWheel.wheelInit(document.getElementById("colorWheelContainer"), 200, 200,this.c_context);
 	this.colorWheel.pickerInit(document.getElementById("colorWheelContainer"));
+
 	
 	$("#tool_eraser").click(function () {
+		console.log("kesiosi")
 		this.canvas = getCurrentCanvas();
 		this.c_context = getCurrentContext();
-		if(this.c_context.globalCompositeOperation === "source-over"){
-	  		this.c_context.globalCompositeOperation = "destination-out";
-		}else if(this.c_context.globalCompositeOperation === "destination-out"){
-	  		this.c_context.globalCompositeOperation = "source-over";
-		}
+	  	this.c_context.globalCompositeOperation = "destination-out";
+	}.bind(this));
+	
+	$("#tool_eraser2").click(function () {
+		console.log("kesiosi2")
+		this.canvas = getCurrentCanvas();
+		this.c_context = getCurrentContext();
+	  	this.c_context.globalCompositeOperation = "source-over";
 	}.bind(this));
 
     $("#tool_clear").click(function(){
@@ -40,11 +45,11 @@ Tool.prototype.toolSetUp = function(canvas,context) {
 	}.bind(this));
 
 	$("#tool_airbrush").click(function(){
-		if(this.airBrush == false){
 			this.airBrush = true;
-		}else if(this.airBrush == true){
+	}.bind(this));
+	
+	$("#tool_airbrush2").click(function(){
 			this.airBrush = false;
-		}
 	}.bind(this));
 	
 	var eraser = $("input[name=eraser]");
@@ -98,5 +103,64 @@ Tool.prototype.setPageSize = function(size){
 
 //----②-------
 
+//テキストスタンプ
+var textstampMode = false;
+var CS_flg = 1;
+var t_line = 1;
 
+function onChangeLine(value) {
+	t_line = value;
+}
 
+function CreateStamp() {
+	switch(CS_flg){
+	case 1 :
+		var s_form = document.forms.id_textStampForm;
+		t_stamp = s_form.id_textStamp.value;
+		t_size = s_form.id_textSize.value;
+		t_font = s_form.id_textFont.value;
+		t_alpha = s_form.id_textAlpha.value;
+		
+		mousePointer(6);
+		textstampMode = true;
+		CS_flg = 2;
+		break;
+	case 2:
+		mousePointer(2);
+		textstampMode = false;
+		CS_flg = 1;
+		break;
+	}
+
+}
+
+function lineChange(context,text,x,y) {
+	//渡されたtextを\nで分割
+	var textlist = text.split("\n");
+	//一文字の幅を取得
+	var lineHeight = context.measureText("＿").width;
+	//一行をさらに forEach で一文字ずつ取得
+	textlist.forEach(function(elm, i) {
+		Array.prototype.forEach.call(elm, function(ch, j) {
+		//measureTextで取得した文字幅ずつy座標をずらす
+		//改行ごとにx座標をずらし描画
+			 context.fillText(ch, x-lineHeight*i, y+lineHeight*j);
+		});
+	});
+}
+
+function putTextStamp(x,y){ 
+	Cto_c.globalAlpha = t_alpha; 
+	Cto_c.font = t_size+"px "+t_font; 
+	Cto_c.fillStyle = Cto_c.strokeStyle; 
+	switch(t_line){
+		case 1 : 
+			Cto_c.fillText(t_stamp,x,y);
+			break;
+		case 2 : 
+			lineChange(Cto_c,t_stamp,x,y);
+			break;
+	} 
+	textstampMode = false;
+	CS_flg = 1;
+}

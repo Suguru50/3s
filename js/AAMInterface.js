@@ -91,25 +91,15 @@ ColorWheel.prototype.wheelInit = function(element, w, h,canvasContext){
 	this._tempCanvas.width = w;		
 	this._tempCanvas.height = h;
 	this._tempCtx = this._tempCanvas.getContext("2d");
-	//this._tempCanvas.style.zIndex = '1';
-
 	
 	this._canvas = document.createElement("canvas");
 	this._canvas.width = w;
 	this._canvas.height = h;
+	this._canvas.setAttribute("id","colorwheel");
 	this._ctx = this._canvas.getContext("2d");
-	
 	this._canvasctx = canvasContext;
-	
-	//this._canvas.style.position = 'absolute';
-	//this._canvas.style.zIndex = '1';
 	element.appendChild(this._canvas);
 	this._canvas.oncontextmenu= function(){ return false}
-	/* this._canvas.addEventListener( "mousedown" , function (e) {
-  alert("イベント３の追加")
-} , false ); */
-
-//ためし
 	this._frontcanvas = document.createElement("canvas");
 	this._frontcanvas.width = 28;
 	this._frontcanvas.height = 28;
@@ -133,11 +123,8 @@ ColorWheel.prototype.wheelInit = function(element, w, h,canvasContext){
 	this._backcanvas.style.zIndex = '1';
 	element.appendChild(this._backcanvas);
 	this._backcanvas.addEventListener( "click" ,function(){
-		console.log("aaa2");
 		this._current=2 ;
-		
 		this.callback(this._color2,this._canvasctx)}.bind(this), false );	
-	
 	var wh = w*0.5;
 	var hh = h*0.5;
 	var ctx = this._tempCtx;
@@ -306,13 +293,10 @@ ColorWheel.prototype._updateView = function()
 	this._drawPickerPoint();
 	
 	if(this._current==1){
-		 console.log("Hello world1dayio"+this._current);
 		this._color1 = this._drawfrontColor(this._frontctx);
 	}else if(this._current==2){
-		 console.log("Hello world2dayio"+this._current);
 		this._color2 = this._drawfrontColor(this._backctx);
 	}else if(this._current==0){
-		 console.log("Hello world0dayio"+this._current);
 		this._color1 = this._drawfrontColor(this._frontctx);
 		this._color2 = this._drawfrontColor(this._backctx);
 		this._current = 1;
@@ -344,14 +328,11 @@ ColorWheel.prototype._drawfrontColor = function(context)//左下の描画色
 
 	if(this._current==1){
 		this._color1 = ColorUtil.colorStyle(this.rgbColor.r,this.rgbColor.g,this.rgbColor.b);
-		console.dir(this.rgbColor);
-		console.log("color1" + this._color1);
 		this._canvasctx.strokeStyle = this._color1;
 		context.fillRect(3,3,22,22);
 		return this._color1;
 	}else if(this._current==2){
 		this._color2 = ColorUtil.colorStyle(this.rgbColor.r,this.rgbColor.g,this.rgbColor.b);
-		console.log("color2" + this._color2);
 		this._canvasctx.strokeStyle = this._color2
 		context.fillRect(3,3,22,22);
 		return this._color2;
@@ -360,7 +341,6 @@ ColorWheel.prototype._drawfrontColor = function(context)//左下の描画色
 		context.fillRect(3,3,22,22);
 		return ColorUtil.colorStyle(this.rgbColor.r,this.rgbColor.g,this.rgbColor.b);
 	}
-	console.log("hontonikanpeki:"+ColorUtil.colorStyle(this.rgbColor.r,this.rgbColor.g,this.rgbColor.b))
 	//context.fillRect(3,3,22,22);
 	//context.restore();
 }
@@ -506,19 +486,15 @@ ColorWheel.prototype._bri2y = function(bri)
 	return y;
 }
 ColorWheel.prototype.callback = function(color,ctx){
-			console.log("コールバック");
 			ctx.strokeStyle = color;
-			console.log(color);
 			
 			if(this._current==1){
-			 	console.log("1change"+this._current);	
 				this._backctx.strokeStyle = "#000000";
 				this._backctx.strokeRect(1,1,26,26);
 				this._frontctx.lineWidth = "2";
 				this._frontctx.strokeStyle = "#87CEEB";
 				this._frontctx.strokeRect(1,1,26,26);
 			}else if(this._current==2){
-		 		console.log("2change"+this._current);
 				this._frontctx.strokeStyle = "#000000";
 				this._frontctx.strokeRect(1,1,26,26);	
 				this._backctx.lineWidth = "2";
@@ -562,7 +538,8 @@ ColorWheel.prototype.pickerInit = function(element){
 		for(var j=0+(8*i); j<8*(i+1); j++){
 			this._cellarray[j] = document.createElement("td");
 			this._cellarray[j].style.backgroundColor = this._colorarray[j];
-			this._cellarray[j].setAttribute("class","itsumono");
+			this._cellarray[j].setAttribute("class","colortable");
+			this._cellarray[j].setAttribute("id","coid"+j);
 			this._cellarray[j].style.table
 			Layout = "fixed";
 			this._cellarray[j].setAttribute("width","15");
@@ -584,10 +561,7 @@ ColorWheel.prototype.pickerInit = function(element){
 				//return ColorUtil.colorStyle(this.rgbColor.data[0],this.rgbColor.data[1],this.rgbColor.data[2]);
 				
 				}.bind(this), false );*/
-			console.log("i="+i);
-			console.log("j="+j);
 			this._rowarray[i].appendChild(this._cellarray[j]);
-			console.log("width="+this._cellarray[i].getAttribute("width")+"color="+this._cellarray[j].style.backgroundColor);
 		}
 		
 		this._rowarray[i].setAttribute("height","15");
@@ -621,13 +595,11 @@ ColorWheel.prototype.colorclick = function (cell) {
 				this._canvasctx.strokeStyle = this._color1;
 				this._frontctx.fillStyle = this._color1;
 				this._frontctx.fillRect(3,3,22,22);
-				console.log("セル栗九時this.color1"+this._color1)
 			}else if(this._current == 2){
 				this._color2= ColorUtil.colorStyle(colorarrayrgb[0],colorarrayrgb[1],colorarrayrgb[2]);
 				this._canvasctx.strokeStyle = this._color2;
 				this._backctx.fillStyle = this._color2;
 				this._backctx.fillRect(3,3,22,22);
-				console.log(this._current)
 			}
 
 }
@@ -642,7 +614,6 @@ ColorWheel.prototype.toolSpuit = function(x,y){
 		g = 255;
 		b = 255;
 	}
-	console.log(r,g,b);
 
 	if(this._current == 1){
 		this._color1 = ColorUtil.colorStyle(r,g,b);

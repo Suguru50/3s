@@ -1,6 +1,8 @@
 header {
 	height: 50px;
-	background-color: #FC6;
+	/*background-color: #FC6;*/
+	//background:-webkit-gradient(linear, center top, center bottom, from(#fff32b), to(#ff9314));
+	background:#ffc457;
 	position: relative;
 	display: none;
 }
@@ -26,43 +28,6 @@ header ul {
 	table-layout: fixed;
 }
 
-header li {
-	list-style: none;
-	height: 50px;
-	display:table-cell;
-	/*-webkit-border-top-left-radius: 20px;  
-	-webkit-border-top-right-radius: 20px; 
-	-moz-border-radius-topleft: 20px;  
-	-moz-border-radius-topright: 20px; */
-	-webkit-border-radius: 20px;  
-	-webkit-border-radius: 20px; 
-	-moz-border-radius: 20px;  
-	-moz-border-radius: 20px; 
-	background:#999;
-	vertical-align:middle;
-}
-
-ul #tablabel1{
-	background-color:#2e8b57;
-	-webkit-box-shadow: 0 0px 3px 2px #66FCA8 inset;
-	cursor:default;
-}
-
-ul #tablabel2{
-	background-color:#ff8c00;
-	-webkit-box-shadow: 0 0px 3px 2px #FFE0A8 inset;
-	cursor:default;
-}
-ul #tablabel3{
-	background-color:#ff6374;
-	-webkit-box-shadow: 0 0px 3px 2px #FFD2D7 inset;
-	cursor:default;
-}
-ul #tablabel4{
-	background-color:#4682b4;
-	-webkit-box-shadow: 0 0px 3px 2px #AEDAFF inset;
-	cursor:default;
-}
 
 .select1{
 	background-color:#2e8b57!important;

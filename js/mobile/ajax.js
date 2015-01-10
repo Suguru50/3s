@@ -143,6 +143,7 @@ function ajaxEnter(){
 					//textChatSetUp();
 					leaveButtonSetUp();
 					enterRoom(Cso_msg,Cso_user);
+					$( "#tab3" ).appendTo( "#panelR .ui-panel-inner" );
 				},error:function() {
 					alert('error');
 				}

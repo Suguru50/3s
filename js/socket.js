@@ -1,20 +1,21 @@
 //①テキストチャットの受け取りと発信
 //  var Cso_socket = io.connect(); //リモート環境？
-  //var Cso_socket = io.connect('http://localhost:3000'); //ローカル
-  //var Cso_socket = io.connect('http://10.0.2.2:3000'); //ローカル
-  //var Cso_socket = io.connect('http://172.16.73.57:3000'); //学校用
-  var Cso_socket = io.connect('http://210.152.156.188:3000'); 
+  //var Cso_socket = io.connect('https://localhost:3000'); //ローカル
+  //var Cso_socket = io.connect('https://172.16.73.57:3000'); //学校用
+  var Cso_socket = io.connect('https://210.152.156.188:3000'); 
   var Cso_userName;
 
   //サーバから受け取るイベント
-  Cso_socket.on("connect", function () {});  // 接続時
+  //Cso_socket.on("connect", function () {});  // 接続時
+  Cso_socket.on("connect",onOpened);  // 接続時
   Cso_socket.on("disconnect", function (Cso_client) {});  // 切断時
   Cso_socket.on("S_to_C_message", function (Cso_data) {
-//	console.log(Cso_data.user+ "と" + Cso_data.msg);
     addMessage(Cso_data.user + "：" + Cso_data.msg);
   });
+  Cso_socket.on('message', onMessage);
 
   Cso_socket.on("enterRoomName", function (Cso_data) {
+	console.log(document.getElementById("startCapture"));
 	document.getElementById("tool_roomName").innerHTML = Cso_data.room;
     addMessage(Cso_data.room + "に" + Cso_data.user + "が入室しました。");
 	$("#shadow").animate({
