@@ -7,10 +7,12 @@ var Sso_socketio = require("socket.io");
 var Sso_fs = require("fs");
 var Sso_util = require("util");
 var Sso_brush = require("./js/brushInfomation.js");
+/*
 Sso_socketio.configure(function(){
     Sso_socketio.set('transports', ['xhr-polling']);
     Sso_socketio.set('polling duration', 10);
 });
+*/
 //-----①----
 //②createServer～MIMEタイプの処理
 //やってきたクライアントにindex.htmlやらを返す
