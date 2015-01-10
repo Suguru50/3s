@@ -1,20 +1,20 @@
 //①ライブラリをrequireで読み込む。
 //家ルータIP　125.54.113.158
 var Sso_path = require("path");
-//var Sso_http = require("http");
-var Sso_http = require("https");
+var Sso_http = require("http");
+//var Sso_http = require("https");
 var Sso_socketio = require("socket.io");
 var Sso_fs = require("fs");
 var Sso_util = require("util");
 var Sso_brush = require("./js/brushInfomation.js");
+Sso_socketio.configure(function(){
+    Sso_socketio.set('transports', ['xhr-polling']);
+    Sso_socketio.set('polling duration', 10);
+});
 //-----①----
-var options = {
-    key: Sso_fs.readFileSync('server.key'),
-    cert: Sso_fs.readFileSync('server.crt'),
-};
 //②createServer～MIMEタイプの処理
 //やってきたクライアントにindex.htmlやらを返す
-var Sso_server = Sso_http.createServer(options,function(Sso_req, Sso_res) {
+var Sso_server = Sso_http.createServer(function(Sso_req, Sso_res) {
 	var Sso_filePath = Sso_req.url;
 	  if (Sso_filePath == '/') {
 		  Sso_filePath = './index.html';
@@ -59,8 +59,8 @@ var Sso_server = Sso_http.createServer(options,function(Sso_req, Sso_res) {
 		}
 	 });
 
-//}).listen(process.env.VMC_APP_PORT || 3000);
-}).listen(3000);
+}).listen(process.env.PORT || 3000);
+//}).listen(3000);
 //-------②-------
 //
 //③上記の内容のseverで動かし始める？その他変数宣言
