@@ -8,6 +8,7 @@ var Sso_fs = require("fs");
 var Sso_util = require("util");
 var Sso_brush = require("./js/brushInfomation.js");
 //-----①----
+var userList = [];
 var options = {
     key: Sso_fs.readFileSync('servernokey.key'),
     cert: Sso_fs.readFileSync('server.crt'),
@@ -127,24 +128,37 @@ Sso_io.sockets.on("connection", function (Sso_socket) {
 function findClientsSocketByRoomId(roomId,io) {
 var res = []
 , room = io.sockets.adapter.rooms[roomId[0]];
-if (room) {
-    for (var id in room) {
-    res.push(io.sockets.adapter.nsp.connected[id]);
-    }
-}
-return res;
+	if (room) {
+		for (var id in room) {
+			res.push(io.sockets.adapter.nsp.connected[id]);
+		}
+	}
+	return res;
 }
 //-----
   function getLogMaximumPreferenceUserID(roomname,io){
 	//var clients = io.sockets.clients(roomname);
-	
+	var roomOwner;
+for (var socketId in io.nsps["/"].adapter.rooms[roomname]) {
+    console.log("ahhah?"+socketId);
+	//ログ取得かなり怪しいので要修正。
+	if(isClient(socketId)){
+		roomOwner = socketId;
+		break;
+	}else{
+	}
+}	
+/*
 	var clients = findClientsSocketByRoomId(roomname,io);
 	var clientskey;
 	for(key in clients){
 		clientskey = key;//最後尾が欲しい = ループの最期
 	}
-	clientskey = 0;
-	return clients[clientskey].id;
+	*/
+	//clientskey = 0;
+	//return clients[clientskey].id;
+    console.log("roomOwner:"+roomOwner);
+	return roomOwner
   }
 
   function joinRoom(Sso_data,userID,type){
@@ -172,11 +186,16 @@ return res;
 			Sso_roomName.push(Sso_data.room);
 			Sso_socket.join(Sso_data.room,function (){
 				if(type==="client"){
+					//console.log("LOG1:"+getLogMaximumPreferenceUserID(Sso_socket.rooms,Sso_io));
+					//console.log("LOG2:"+getEmitUserID(Sso_socket));
+					//Sso_io.to(getLogMaximumPreferenceUserID(Sso_socket.rooms,Sso_io))
+					Sso_io.to(getLogMaximumPreferenceUserID(Sso_socket.rooms[1],Sso_io))
+						.emit("logRequest",{userID:getEmitUserID(Sso_socket)});
 					Sso_io.sockets.in(Sso_data.room)
 						.emit("enterRoomName",{room:Sso_data.room, user:Sso_data.user});
-					Sso_io.to(getLogMaximumPreferenceUserID(Sso_socket.rooms,Sso_io))
-						.emit("logRequest",{userID:getEmitUserID(Sso_socket)});
+					userList[getEmitUserID(Sso_socket)] = "client";
 				}else if(type==="content"){
+					userList[getEmitUserID(Sso_socket)] = "content";
 					Sso_io.sockets.in(Sso_data.room)
 						.emit("contentMessage",{msg:"これはサーバーからコンテントスクリプトに対してのメッセージです。このメッセージはコンテントスクリプトが入室している部屋にいるユーザー全員に送信され、それらのユーザーのコンテントスクリプトが受けとり処理します。"});
 				}
@@ -231,6 +250,14 @@ function isNull(Sso_data){
 	}
 }
 
+function isClient(userId){
+	console.log("isclient?"+userList[userId]);
+	if(userList[userId]=="client"){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 //-------④------
 
