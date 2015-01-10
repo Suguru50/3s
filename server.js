@@ -9,7 +9,7 @@ var Sso_util = require("util");
 var Sso_brush = require("./js/brushInfomation.js");
 //-----①----
 var options = {
-    key: Sso_fs.readFileSync('server.key'),
+    key: Sso_fs.readFileSync('servernokey.key'),
     cert: Sso_fs.readFileSync('server.crt'),
 };
 //②createServer～MIMEタイプの処理
