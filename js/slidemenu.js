@@ -1,20 +1,36 @@
-$(".toggleButton").click(function(){
+$(".toggleButton1,.toggleButton2").click(function(){
+	var thispp = $(this).parent().parent();
 	flatRowButtonListener(function(){
-		if($(this).parent().parent().hasClass("slidehidden")){
-			$(this).parent().parent().removeClass("slidehidden");
-			var curHeight = $(this).parent().parent().height();
-			var autoHeight = $(this).parent().parent().css('height', 'auto').height();
-			$(this).parent().parent().height(curHeight);
-			$(this).parent().parent().stop().animate({ height: autoHeight },500,function(){
-				$(this).parent().parent().css('height', 'auto');//functionのなかだからみれない
-				$(this).parent().parent().css('overflow', 'visible');
-			}.bind(this));
+
+		if(thispp.hasClass("slidehidden")){
+			thispp.removeClass("slidehidden");
+			var curHeight = thispp.height();
+			thispp.height(curHeight);
+			if(thispp.attr("id")==$(".slideLOuter").attr("id")){
+				if($(".slideLOuter").hasClass("scaleup")){
+					thispp.stop().animate({ height: 390 },500,function(){
+						thispp.css('height', 390);
+						thispp.css('overflow', 'visible');
+					}.bind(this));
+				}else{
+					thispp.stop().animate({ height: 160 },500,function(){
+						thispp.css('height', 160);
+						thispp.css('overflow', 'visible');
+					}.bind(this));
+				}
+			}else if(thispp.attr("id")==$("#flatpanel").attr("id")){
+				thispp.stop().animate({ height: 365 },500,function(){
+					thispp.css('height', 365);
+					thispp.css('overflow', 'visible');
+				}.bind(this));
+			}
 		}else {
-			$(this).parent().parent().addClass("slidehidden");
-			$(this).parent().parent().animate({height:15},500,
+			thispp.addClass("slidehidden");
+			thispp.animate({height:15},500,
 				function(){
-					$(this).parent().parent().css('overflow', 'hidden');
+					thispp.css('overflow', 'hidden');
 			}.bind(this));
 		}
 	}.bind(this));
 });
+

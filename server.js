@@ -140,7 +140,6 @@ var res = []
 	//var clients = io.sockets.clients(roomname);
 	var roomOwner;
 for (var socketId in io.nsps["/"].adapter.rooms[roomname]) {
-    console.log("ahhah?"+socketId);
 	//ログ取得かなり怪しいので要修正。
 	if(isClient(socketId)){
 		roomOwner = socketId;
@@ -157,7 +156,6 @@ for (var socketId in io.nsps["/"].adapter.rooms[roomname]) {
 	*/
 	//clientskey = 0;
 	//return clients[clientskey].id;
-    console.log("roomOwner:"+roomOwner);
 	return roomOwner
   }
 
@@ -186,9 +184,6 @@ for (var socketId in io.nsps["/"].adapter.rooms[roomname]) {
 			Sso_roomName.push(Sso_data.room);
 			Sso_socket.join(Sso_data.room,function (){
 				if(type==="client"){
-					//console.log("LOG1:"+getLogMaximumPreferenceUserID(Sso_socket.rooms,Sso_io));
-					//console.log("LOG2:"+getEmitUserID(Sso_socket));
-					//Sso_io.to(getLogMaximumPreferenceUserID(Sso_socket.rooms,Sso_io))
 					Sso_io.to(getLogMaximumPreferenceUserID(Sso_socket.rooms[1],Sso_io))
 						.emit("logRequest",{userID:getEmitUserID(Sso_socket)});
 					Sso_io.sockets.in(Sso_data.room)
@@ -251,7 +246,6 @@ function isNull(Sso_data){
 }
 
 function isClient(userId){
-	console.log("isclient?"+userList[userId]);
 	if(userList[userId]=="client"){
 		return true;
 	}else{
@@ -274,10 +268,15 @@ function isClient(userId){
   // toをinに替えても動くが、公式のAPIでは使い分けているのでそれに倣う
   // 		※なぜ
   Sso_socket.on("draw", function (Sso_data) {
-	//var r = getEnteringRoomName(Sso_socket);
 	var r = Sso_socket.rooms;
-  	//broadcastToRoom(r,"draw",Sso_brushInfomation);
+	console.log("brushinfo");
+	console.dir(Sso_data.info);
   	broadcastToRoom(r,"draw",Sso_data);
+  });
+
+  Sso_socket.on("drawTextStamp", function (Sso_data) {
+	var r = Sso_socket.rooms;
+  	broadcastToRoom(r,"drawTextStamp",Sso_data);
   });
 
   function broadcastToRoom(Sso_room,Sso_param,Sso_data){

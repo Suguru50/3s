@@ -87,9 +87,7 @@ ColorUtil.colorStyle = function(r,g,b){
 	hexB = b.toString(16);
 	
 	if(0<=r && r<16){
-		
 		hexR = "0" + hexR;
-		console.log("fgddddddddddddd"+hexR);
 	}
 	if(0<=g && g<16){
 		hexG = "0" + hexG;

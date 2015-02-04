@@ -1,8 +1,20 @@
 var place;
-
+var latitude;
+var longitude;
 function successCallback(position) {
 	setMap(position.coords.latitude,position.coords.longitude);
 	emitMapData(place);
+	console.log("map log");
+	console.log(position.coords.longitude);
+	latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
+}
+
+function getLatitude(){
+	return latitude;
+}
+function getLongitude(){
+	return longitude;
 }
 
 function errorCallback(error) {
@@ -33,7 +45,6 @@ function setMap(lat,lng) {
 	panorama = new google.maps.StreetViewPanorama(document.getElementById('canvas_eventCanvas'));
 	var sv = new google.maps.StreetViewService();//ストリートビューの状況やデータをあつかう
 	//place = new google.maps.LatLng(42.345573,-71.098326);//緯度経度のポイントを設定する
-	//place = new google.maps.LatLng(35.6270374,139.342189);//hyoujisarenai
 	var mapOptions = {//googlemapの状態。center：マップの中央のlatlng、zoom表示倍率、
 					//mapTypeId：ここはROADMAPの場合国道何号とか
 					//何々通りとか名前が表示されるようになる。
@@ -49,6 +60,14 @@ function setMap(lat,lng) {
 	//var panoramaOptions = {position:inputPlace2,pov: {heading:34,pitch:10,zoom:1}};
 	//	var panorama = new google.maps.StreetViewPanorama(document.getElementById("canvas_eventCanvas"),panoramaOptions);
 	
+	google.maps.event.addListener(map,'click',function(event){
+		console.log("staticlatLng:");
+		console.log(event.latLng);
+		//var google_tile =  "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + event.latLng + "," +
+			//getLongitude() + "&zoom=14&size=2000x2000&markers=color:blue|label:U|" +
+			//getLatitude() + ',' + getLongitude();
+
+	});
 	sv.getPanoramaByLocation(place,PANORAMA_SERCH_RANGE,viewCallBack);
 	//第二引数はクリックされた位置からの半径
 	//コールバックの引数はpanoramadataと

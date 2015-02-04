@@ -179,6 +179,8 @@ ColorWheel.prototype.setRGB = function(r, g, b)
 
 ColorWheel.prototype._downHandler = function(e)
 {
+	$("#flatpanel,.slideLOuter").draggable('destroy');/*memo*/
+
 	var ref = this;
 	window.onmouseup = function(e){ ref._upHandler(e) }
 	window.onmousemove = function(e){ ref._moveHandler(e) }
@@ -209,6 +211,10 @@ ColorWheel.prototype._downHandler = function(e)
 }
 ColorWheel.prototype._upHandler = function(e)
 {
+	$("#flatpanel,.slideLOuter").draggable({
+		//containment: '#jquery-ui-draggable-wrap',
+		scroll: false
+	} );
 	this._isMouseDownForWheel = false;
 	this._isMouseDownForRect = false;
 	window.onmouseup = undefined;

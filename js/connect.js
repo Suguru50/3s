@@ -1,8 +1,8 @@
-
+var removeVideoId;
   var localStream = null;
 window.addEventListener("message", function(msg) {
-        console.log("Content script received: ");
-        console.log(msg.data.response);
+        //console.log("Content script received: ");
+        //console.log(msg.data.response);
 		navigator.webkitGetUserMedia({
       		audio: false,
      		video: { mandatory: { chromeMediaSource: "desktop",
@@ -10,14 +10,14 @@ window.addEventListener("message", function(msg) {
 				}, gotStream, getUserMediaError);
     }, false);  
 function gotStream(stream) {
-  console.log("Received local stream");
+  //console.log("Received local stream");
   var video = document.getElementById("local-video");
   video.src = URL.createObjectURL(stream);
   localStream = stream;
   stream.onended = function() { console.log("Ended"); };
 }
 function getUserMediaError() {
-  console.log("getUserMedia() failed.");
+  //console.log("getUserMedia() failed.");
 }
 //-----------------
 var localVideo = document.getElementById('local-video');
@@ -47,6 +47,7 @@ var localVideo = document.getElementById('local-video');
     var element = null;
     for (var id in videoElementsStandBy) {
       element = videoElementsStandBy[id];
+	  removeVideoId = videoElementsStandBy[id];
       delete videoElementsStandBy[id];
       return element;
     }
@@ -64,30 +65,42 @@ var localVideo = document.getElementById('local-video');
   }
  
   function attachVideo(id, stream) {
-    console.log('try to attach video. id=' + id);
+    //console.log('try to attach video. id=' + id);
     var videoElement = popVideoStandBy();
+	console.dir(videoElement);
     if (videoElement) {
-      videoElement.src = window.URL.createObjectURL(stream);
-      console.log("videoElement.src=" + videoElement.src);
-      pushVideoInUse(id, videoElement);
-      videoElement.style.display = 'block';
+      //videoElement.src = window.URL.createObjectURL(stream);
+	  /*複数人だと怪しい*/
+		console.log("判断0"+document.getElementById("webrtc-remote-video-0").readyState);
+		console.log("判断1"+document.getElementById("webrtc-remote-video-1").readyState);
+		console.log("判断2"+document.getElementById("webrtc-remote-video-2").readyState);
+		for(i=0;i<3;i++){
+			if(!document.getElementById("webrtc-remote-video-"+i).readyState){
+				document.getElementById("webrtc-remote-video-"+i).src 
+						= window.URL.createObjectURL(stream);
+				break;
+			}
+		}
+		/**/
+		pushVideoInUse(id, videoElement);
+      //videoElement.style.display = 'block';
     }
     else {
-      console.error('--- no video element stand by.');
+      //console.error('--- no video element stand by.');
     }
   }
  
   function detachVideo(id) {
-    console.log('try to detach video. id=' + id);
+    //console.log('try to detach video. id=' + id);
     var videoElement = popVideoInUse(id);
     if (videoElement) {
       videoElement.pause();
       videoElement.src = "";
-      console.log("videoElement.src=" + videoElement.src);
+      //console.log("videoElement.src=" + videoElement.src);
       pushVideoStandBy(videoElement);
     }
     else {
-      console.warn('warning --- no video element using with id=' + id);
+      //console.warn('warning --- no video element using with id=' + id);
     }
   }
  
@@ -117,7 +130,7 @@ var localVideo = document.getElementById('local-video');
   
   
   function isLocalStreamStarted() {
-	  console.log(localStream);
+	  //console.log(localStream);
     if (localStream) {
       return true;
     }
@@ -152,8 +165,7 @@ var localVideo = document.getElementById('local-video');
     for (var id in connections) {
       count++;
     }
- 
-    console.log('getConnectionCount=' + count);
+    //console.log('getConnectionCount=' + count);
     return count;
   }
  
@@ -194,13 +206,13 @@ var localVideo = document.getElementById('local-video');
   function stopConnection(id) {
     var conn = connections[id];
     if(conn) {
-      console.log('stop and delete connection with id=' + id);
+      //console.log('stop and delete connection with id=' + id);
       conn.peerconnection.close();
       conn.peerconnection = null;
       delete connections[id];
     }
     else {
-      console.log('try to stop connection, but not found id=' + id);
+      //console.log('try to stop connection, but not found id=' + id);
     }
   }
  
@@ -240,7 +252,37 @@ var localVideo = document.getElementById('local-video');
       if (! isLocalStreamStarted()) {
         return;
       }
+
       if (conn) {
+		detachVideo(id); // force detach video
+		stopConnection(id);
+        Cso_socket.json.send({type: "user dissconnected", sendto: id });
+		conn=false;
+		/*
+		switch(removeVideoId.id){
+			case "webrtc-remote-video-0":
+				console.log("aaaaa");
+    			console.dir(videoElementsInUse);
+  				popVideoInUse(getVideoForRemote(0));
+    			//console.dir(videoElementsStandBy);
+    			console.dir(videoElementsInUse);
+				break;
+			case "webrtc-remote-video-1":
+				console.log("bbbb");
+    			console.dir(videoElementsInUse);
+  				popVideoInUse(getVideoForRemote(1));
+    			//console.dir(videoElementsStandBy);
+    			console.dir(videoElementsInUse);
+				break;
+			case "webrtc-remote-video-2":
+				console.log("ccccc");
+    			console.dir(videoElementsInUse);
+  				popVideoInUse(getVideoForRemote(2));
+    			//console.dir(videoElementsStandBy);
+    			console.dir(videoElementsInUse);
+				break;
+		}
+		*/
         return;  // already connected
       }
  
@@ -256,16 +298,16 @@ var localVideo = document.getElementById('local-video');
       sendOffer(id);
       return;
     } else if (evt.type === 'offer') {
-      console.log("Received offer, set offer, sending answer....")
+      //console.log("Received offer, set offer, sending answer....")
       onOffer(evt);      
     } else if (evt.type === 'answer' && isPeerStarted()) {  // **
-      console.log('Received answer, settinng answer SDP');
+      //console.log('Received answer, settinng answer SDP');
       onAnswer(evt);
     } else if (evt.type === 'candidate' && isPeerStarted()) { // **
-      console.log('Received ICE candidate...');
+      //console.log('Received ICE candidate...');
       onCandidate(evt);
     } else if (evt.type === 'user dissconnected' && isPeerStarted()) { // **
-      console.log("disconnected");
+      //console.log("disconnected");
       //stop();
       detachVideo(id); // force detach video
       stopConnection(id);
@@ -323,16 +365,16 @@ var localVideo = document.getElementById('local-video');
   
   
   function onOffer(evt) {
-    console.log("Received offer...")
-    console.log(evt);
+    //console.log("Received offer...")
+    //console.log(evt);
     setOffer(evt);
     sendAnswer(evt);
     //peerStarted = true; --
   }
   
   function onAnswer(evt) {
-    console.log("Received Answer...")
-    console.log(evt);
+    //console.log("Received Answer...")
+    //console.log(evt);
     setAnswer(evt);
   }
   
@@ -351,15 +393,15 @@ var localVideo = document.getElementById('local-video');
     }
       
     var candidate = new RTCIceCandidate({sdpMLineIndex:evt.sdpMLineIndex, sdpMid:evt.sdpMid, candidate:evt.candidate});
-    console.log("Received Candidate...")
-    console.log(candidate);
+    //console.log("Received Candidate...")
+    //console.log(candidate);
     conn.peerconnection.addIceCandidate(candidate);
   }
  
   function sendSDP(sdp) {
     var text = JSON.stringify(sdp);
-    console.log("---sending sdp text ---");
-    console.log(text);
+    //console.log("---sending sdp text ---");
+    //console.log(text);
     //textForSendSDP.value = text;
     
     // send via socket
@@ -368,8 +410,8 @@ var localVideo = document.getElementById('local-video');
   
   function sendCandidate(candidate) {
     var text = JSON.stringify(candidate);
-    console.log("---sending candidate text ---");
-    console.log(text);
+    //console.log("---sending candidate text ---");
+    //console.log(text);
     //textForSendICE.value = (textForSendICE.value + CR + iceSeparator + CR + text + CR);
     //textForSendICE.scrollTop = textForSendICE.scrollHeight;
     
@@ -389,7 +431,7 @@ var localVideo = document.getElementById('local-video');
      },
      function (error) { // error
       console.error('An error occurred:');
-      console.error(error);
+      //console.error(error);
       return;
      }
     );
@@ -419,14 +461,14 @@ var localVideo = document.getElementById('local-video');
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
-        console.log(evt.candidate);
+        //console.log(evt.candidate);
         sendCandidate({type: "candidate", 
                           sendto: conn.id,
                           sdpMLineIndex: evt.candidate.sdpMLineIndex,
                           sdpMid: evt.candidate.sdpMid,
                           candidate: evt.candidate.candidate});
       } else {
-        console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
+        //console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
         conn.established = true;
       }
     };

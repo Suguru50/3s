@@ -9,7 +9,19 @@ body{
 	margin-right: auto;
 	padding: 0px;
 }
-#flatlist{
+#flatlist1{
+	background-color:rgba(128,128,128,0.5);
+	position:relative;
+	/*display:table;*/
+	display:flex;
+	list-style-type:none;
+	border-collapse: separate;
+	top:0px;
+	margin:0px;
+	padding:0px;
+}
+#flatlist2{
+	background-color:rgba(128,128,128,0.5);
 	position:relative;
 	display:table;
 	list-style-type:none;
@@ -24,15 +36,19 @@ body{
 	display:table-cell;
 	right:20px;
 	top:20px;
+	box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.3);
 	z-index:150;
 }
 
 .flatrow{
 	display:flex;
 }
+#flatrow0{
+	background:#ffc457;
+}
 #flatrow1{
 	top:0px;
-	}
+}
 #flatrow2{
 	top:70px;
 }

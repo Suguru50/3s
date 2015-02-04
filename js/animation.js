@@ -66,6 +66,8 @@ function toolMoveCursor(e){
 */
 
 //function setFrame(e,frameNum){
+var trimmingAreaX;
+var trimmingAreaY;
 function setFrame(x,y){
 	var tempCanvas1 = document.createElement("canvas");
 	tempCanvas1.width = 200;
@@ -84,10 +86,10 @@ function setFrame(x,y){
 	fctx.fillRect(0,0,ANIMATE_X,ANIMATE_Y);
 	var img1;
 	var img2;
-	//img1 = Cto_lc1.getImageData(X,Y,ANIMATE_X,ANIMATE_Y);
-	//img2 = Cto_lc2.getImageData(X,Y,ANIMATE_X,ANIMATE_Y);
-	img1 = Cto_lc1.getImageData((x-(ANIMATE_X/2)),(y-(ANIMATE_Y/2)),ANIMATE_X,ANIMATE_Y);
-	img2 = Cto_lc2.getImageData((x-(ANIMATE_X/2)),(y-(ANIMATE_Y/2)),ANIMATE_X,ANIMATE_Y);
+	trimmingAreaX = x-(ANIMATE_X/2);
+	trimmingAreaY = y-(ANIMATE_Y/2);
+	img1 = Cto_lc1.getImageData(trimmingAreaX,trimmingAreaY,ANIMATE_X,ANIMATE_Y);
+	img2 = Cto_lc2.getImageData(trimmingAreaX,trimmingAreaY,ANIMATE_X,ANIMATE_Y);
 	tempContext1.putImageData(img1,0,0);
 	tempContext2.putImageData(img2,0,0);
 
@@ -102,31 +104,30 @@ function setFrame(x,y){
 	*/
 	fctx.fillStyle = "#FFFFFF";
 	fctx.fillRect(0,0,ANIMATE_X,ANIMATE_Y);
+	var mapImage = mapTransform(fctx);
 	fctx.drawImage(tempImage1,0,0);
 	fctx.drawImage(tempImage2,0,0);
+}
+
+function mapTransform(ctx){
+	var e = new jQuery.Event("click");
+	e.offsetX = 100;
+	e.offsetY = 100;
+	$('#canvas_eventCanvas').trigger(e);
 }
 
 function draw() {
 	toolcanvas.addEventListener("mousedown",function(e){
 	},false);
-	/*
-	canvas2.addEventListener("mouseup",function(e){
-		},false);
-		*/
 }
+
 function addAnimation(frame){
-	/*
-		var frameImage = ctx3.getImageData(0,0,ANIMATE_X,ANIMATE_Y);
-		var frameCanvas = document.getElementById(frame+"_img");
-		var frameContext = frameCanvas.getContext("2d");
-		frameContext.putImageData(frameImage,0,0);
-		*/
 }
 
 function createAnimation(){
-	$("#animeshadow").css('display', 'block').animate({
+	$("#animeshadow").css('display', 'none').animate({
 	opacity:'1'},400,function(){
-encoder = new GIFEncoder();
+		encoder = new GIFEncoder();
 		encoder.setRepeat(0);
 		encoder.setDelay(100);
 		encoder.setSize(ANIMATE_X,ANIMATE_Y);
@@ -140,7 +141,7 @@ encoder = new GIFEncoder();
 		document.getElementById("anim").src = 'data:image/gif;base64,'+encode64(encoder.stream().getData());
 		$("#animeshadow").css('display', 'none').animate({
 		opacity:'0'},200,function(){
-			$('#tab2').animate({ scrollTop: $("#tab2")[0].scrollHeight },400,'swing');
+			$('#content6').animate({ scrollTop: $("#content6")[0].scrollHeight },400,'swing');
 		});
 	});
 }

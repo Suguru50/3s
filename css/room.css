@@ -68,7 +68,7 @@
 	left: 0px;
 	right: 0px;
 	bottom: 20px;
-	margin: 0 280px 0px 280px;
+	margin: 0 0 0 0;
 	/*width:-webkit-calc(100% - 250px) ;*/
 	/*background: #FFFDD0;*/
 	background-image: url("../images/chatback.png");
@@ -95,14 +95,19 @@
 	box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.3);
 }
 
-video{
-	height: 100%;
-	width:100%;
+input{
+	-webkit-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+-moz-box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+box-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
 }
 
 p{
 	margin: 0;
 }
+
 html {
 	height: 100%;
 }
@@ -132,7 +137,6 @@ article {
 
 
 .toggleL {
-	position: absolute;
 	top:0;
 	bottom:0;
 	right:0;
@@ -144,18 +148,19 @@ article {
 .slideLOuter{
 	position: absolute;
 	/*background:rgba(255, 200, 225, 0.67);*/
-	background:url(../images/woodback.png);
-	background-color:rgba(0,0,0,0.5);
+	background-color:rgba(255,169,87,1);
 	box-shadow:5px 5px 0px 0px rgba(0,0,0,0.3);
 	top:0;
 	bottom:0;
 	margin-top:20px;
 	margin-bottom:25px;
 	margin-left:20px;
-	width:220px;
+	/*width:220px;*/
+	width:420px;
 	float: left;
 	z-index:150;
-	height: auto;
+	/*height: 365px;*/
+	height: 160px;
 }
 .slideROuter{
 	top:0px;
@@ -171,7 +176,13 @@ article {
 .slidehidden{
 }
 
-.toggleButton{
+.toggleButton1{
+	width:auto;
+	height:auto;
+	right:0px;
+	float:left;
+}
+.toggleButton2{
 	width:auto;
 	height:auto;
 	right:0px;
@@ -185,16 +196,6 @@ article {
 #video_info {
 	height:100%;
 	overflow:hidden;
-	/*
-	top:0;
-	bottom:0;
-	margin-top:20px;
-	margin-bottom:25px;
-	margin-left:20px;
-	width:220px;
-	height: auto;
-	background: rgba(150,150,150,0.5);
-	box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.4);*/
 }
 
 
@@ -447,12 +448,14 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 	-webkit-border-radius: 8px;
 	font-family:'title';
 	color:#AAA;
+	height:19px;
 }
 .layervisible.visible{
 	background:
 		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
 		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
 	color:#000;
+	height:19px;
 }
 
 @font-face {
@@ -487,29 +490,23 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 }
 
 .basebutton{
-	text-align:center;
-	margin:2px;
-	cursor:default;
-	border: 2px ridge #bbb;
-	-webkit-border-radius: 8px;
-	color:#000;
-	font-family:'title';
-	white-space: nowrap;
-	font-size:16px;
-	/*display:inline-block;中の文字ピッタリに。考え中*/
-	background:
-		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
-		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+	width:70px;
+	height:70px;
+	background:#ffc457;
 }
 
 #plusbutton{
+	height:20px;
 	width:20px;
 	float:left;
 }
 #minusbutton{
+	height:20px;
 	width:20px;
+	float:left;
 }
 #samebutton{
+	height:20px;
 	width:50%;
 }
 
@@ -529,8 +526,24 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 	background:#ffc457;
 }
 
-.row { display:table; width:250px; margin:0 auto }
-.cell { display:table-cell; vertical-align:top; width:50px; height:50px;}
+#mapplus{
+	background-image: url("../images/mapplus.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+	height:35px;
+	width:70px;
+}
+
+#mapminus{
+	background-image: url("../images/mapminus.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+	height:35px;
+	width:70px;
+}
+
+.row { display:table; margin:0 auto }
+.cell { display:table-cell; vertical-align:top; width:30px; height:50px;}
 
 #key1{
 }
@@ -582,3 +595,26 @@ ul #tablabel5{
 	-webkit-box-shadow: 0 0px 3px 2px #AEDAFF inset;
 	cursor:default;
 }
+
+#mapleft{
+	transform: rotate(-90deg);
+}
+
+#mapright{
+	transform: rotate(90deg);
+}
+
+#mapdown{
+	transform: rotate(180deg);
+}
+
+#testmap{
+	background-image: url("../images/startmap.png");
+	background-color:#FFAD68;
+	background-repeat:no-repeat;
+	background-position:center center;
+	height:70px;
+	width:70px;
+}
+
+

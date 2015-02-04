@@ -1,6 +1,7 @@
 //①テキストチャットの受け取りと発信
 //  var Cso_socket = io.connect(); //リモート環境？
   //var Cso_socket = io.connect('https://localhost:3000'); //ローカル
+  //var Cso_socket = io.connect('https://hacneec.sakura.ne.jp:3000/'); //ローカル
   //var Cso_socket = io.connect('https://172.16.73.57:3000'); //学校用
   var Cso_socket = io.connect('https://210.152.156.188:3000'); 
   var Cso_userName;
@@ -15,7 +16,6 @@
   Cso_socket.on('message', onMessage);
 
   Cso_socket.on("enterRoomName", function (Cso_data) {
-	console.log(document.getElementById("startCapture"));
 	document.getElementById("tool_roomName").innerHTML = Cso_data.room;
     addMessage(Cso_data.room + "に" + Cso_data.user + "が入室しました。");
 	$("#shadow").animate({

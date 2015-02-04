@@ -8,8 +8,9 @@ content="width=device-width,
  maximum-scale=1, 
  user-scalable=no" charset="UTF-8">
 <title>Share 3S</title>
-
+<link rel="stylesheet" href="css/jquery-ui.css">
 <script src="js/jquery-2.0.0.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script>
 (function(){
 	var _UA = navigator.userAgent;
@@ -36,9 +37,7 @@ content="width=device-width,
 	}
 })();
 </script>
-
 <script src="/socket.io/socket.io.js"></script>
-<!--script src="/js/socket.js"></script-->
 <script src="/js/textchat.js"></script>
 <script src="/js/brushInfomation.js"></script>
 <script src="/js/tool.js"></script>
@@ -52,8 +51,7 @@ content="width=device-width,
 <script type="text/javascript" src="/js/jsgif-master/NeuQuant.js"></script>
 <script type="text/javascript" src="/js/jsgif-master/GIFEncoder.js"></script>
 <script type="text/javascript" src="/js/jsgif-master/b64.js"></script>
-<!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script-->
-<!--script type="text/javascript" src="/js/googlemaps.js"></script-->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 
 </head>
 
@@ -64,8 +62,9 @@ content="width=device-width,
 	<header>
 		<div id="smartmenu" class="header_left">
 			<div role="main" class="ui-content">
-				<!--2�p�l����J�����߂̃����N�{�^��-->
-				<a href="#panelL" id="openmenu" class="ui-btn ui-icon-info ui-btn-icon-left ico-menu"><img src="images/video.png" lat="video"></a>
+				<a href="#panelL" id="openmenu" class="ui-btn ui-icon-info ui-btn-icon-left ico-menu">
+					<img src="images/video.png" lat="video">
+				</a>
 			</div>
 		</div>
 		<div id="header_info">
@@ -74,7 +73,6 @@ content="width=device-width,
 		</div>
 		<div id="smartmenu" class="header_right">
 			<div role="main" class="ui-content">
-				<!--2�p�l����J�����߂̃����N�{�^��-->
 				<a href="#panelR" id="openmenu" class="ui-btn ui-icon-info ui-btn-icon-left ico-menu"><img src="images/maps.png" lat="maps"></a>
 			</div>
 		</div>

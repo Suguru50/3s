@@ -107,20 +107,24 @@ Tool.prototype.setPageSize = function(size){
 var textstampMode = false;
 var CS_flg = 1;
 var t_line = 1;
-
+var t_stamp
+var t_size 
+var t_font 
+var t_alpha
 function onChangeLine(value) {
 	t_line = value;
 }
 
+var s_form;
+
 function CreateStamp() {
 	switch(CS_flg){
 	case 1 :
-		var s_form = document.forms.id_textStampForm;
+		s_form = document.forms.id_textStampForm;
 		t_stamp = s_form.id_textStamp.value;
 		t_size = s_form.id_textSize.value;
 		t_font = s_form.id_textFont.value;
 		t_alpha = s_form.id_textAlpha.value;
-		
 		mousePointer(6);
 		textstampMode = true;
 		CS_flg = 2;
@@ -149,10 +153,10 @@ function lineChange(context,text,x,y) {
 	});
 }
 
-function putTextStamp(x,y){ 
+function putTextStamp(x,y,color){ 
 	Cto_c.globalAlpha = t_alpha; 
 	Cto_c.font = t_size+"px "+t_font; 
-	Cto_c.fillStyle = Cto_c.strokeStyle; 
+	Cto_c.fillStyle = color; 
 	switch(t_line){
 		case 1 : 
 			Cto_c.fillText(t_stamp,x,y);
@@ -164,3 +168,33 @@ function putTextStamp(x,y){
 	textstampMode = false;
 	CS_flg = 1;
 }
+
+function getT_alpha(){
+	return t_alpha;
+}
+
+function getT_font(){
+	return t_font;
+}
+
+function getT_size(){
+	return t_size;
+}
+function getT_stamp(){
+	return t_stamp;
+}
+
+function setT_alpha(alpha){
+	t_alpha = alpha;
+}
+
+function setT_font(font){
+	t_font = font;
+}
+function setT_size(size){
+	t_size = size;
+}
+function setT_stamp(text){
+	t_stamp = text;
+}
+

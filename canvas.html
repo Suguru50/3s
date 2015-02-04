@@ -4,32 +4,34 @@
 <script src="js/AAMUtils.js"></script>
 <script src="js/AAMInterface.js"></script>
 <script src="js/connect.js"></script>
-<script src="js/socket.js"></script>
 <script src="js/mousePointer.js"></script>
 <script src="js/slidemenu.js"></script>
+<script src="js/socket.js"></script>
+<script src="js/videoui.js"></script>
+<script type="text/javascript" src="/js/googlemaps.js"></script>
+
 <div class="slideLOuter">
-	<div id="video_info" class="L_slide_panel">
-		<div class="panel_main L_main">
-			<div id="menubarL" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton"></div>
-				<div id="socketbox">
-					<!--h2>WebRTC</h2-->
-					<div id="buttonblock">
-						<div id="startVideo" class="basebutton" onclick="startVideo();">Start video</div>
-						<div id="stopVideo" class="basebutton" onclick="stopVideo();">Stop video</div>
-						<div id="Connect" class="basebutton" onclick="call();">Connect</div>
-						<div id="startCapture" class="basebutton">Start capture</div>
-						<!--button type="button" onclick="hangUp();">Hang Up</button-->
-						<br />
-					</div>
-					<div id="videoBlock">
-						<video id="local-video" class="webvideo" autoplay ></video>
-						<video id="webrtc-remote-video-0" class="webvideo" autoplay ></video>
-						<video id="webrtc-remote-video-1" class="webvideo" autoplay></video>
-						<video id="webrtc-remote-video-2" class="webvideo" autoplay></video>
-					</div>
-				</div>
+	<div id="menubarL" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton2"></div>
+		<div id="socketbox">
+			<ul id="flatlist1">
+				<li id="flatrow0" class="flatrow" value="0">
+					<div id="startVideo" class="basebutton" onclick="startVideo();"></div>
+					<div id="stopVideo" class="basebutton" onclick="stopVideo();"></div>
+					<div id="startCapture" class="basebutton"></div>
+				</li>
+				<li id="flatrow0" class="flatrow" value="1">
+					<div id="Connect" class="basebutton" onclick="call();"></div>
+					<div id="videoscaledown" class="basebutton" onclick="videoscaledown"></div>
+					<div id="videoscaleup" class="basebutton"></div>
+				</li>
+			</ul>
+			<div id="videoBlock">
+				<video id="local-video" class="webvideo" autoplay ></video>
+				<video id="webrtc-remote-video-0" class="webvideo" autoplay ></video>
+				<video id="webrtc-remote-video-1" class="webvideo" autoplay></video>
+				<video id="webrtc-remote-video-2" class="webvideo" autoplay></video>
 			</div>
-		</div><!-- video_info end -->
+		</div>
 	</div>
 </div>
 
@@ -55,24 +57,16 @@
 	</div>
 </div><!-- chat end -->
 <div id="zoomInfo"></div>
-<div class="slideROuter" style="display:none">
-	<div id="tool_info" class="R_slide_panel">
-		<div class="panel_main R_main">
-			<div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleR toggleButton"></div>
-		</div>
-	</div>
-</div>
 	<div id="flatpanel">
-		<div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton"></div>
-		<ul id="flatlist">
+		<!--div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton"></div-->
+		<div id="menubarR" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton1"></div>
+		<ul id="flatlist2">
 			<li id="flatrow1" class="flatrow" value="0">
 			<div id="flatcell1" class="flatcell"><div id="content1" class="flatcontent">
-
-					<div class="canvas_paint_chat">
-						<div id="colorWheelContainer"></div>
-						<div id="toolButtonContainer"></div>
-					</div>
-
+				<div class="canvas_paint_chat">
+					<div id="colorWheelContainer"></div>
+					<div id="toolButtonContainer"></div>
+				</div>
             </div>
             <div id="flat1" class="flatbutton" value="1"></div></div>
 			<div id="flatcell2" class="flatcell"><div id="content2" class="flatcontent">
@@ -116,10 +110,10 @@
 					<form name="textStampForm" id="id_textStampForm" action="">
 						<input name="textStamp" id="id_textStamp" type="text" value="">
 						<input name="textSize" id="id_textSize" type="number" value="15" min="1">
-						<input name="textAlpha" id="id_textAlpha" type="number" value="1" max="1" min="0" step="0.01">
+						<input name="textAlpha" id="id_textAlpha" type="number" value="1" max="1" min="0" step="0.01"><br>
 						<input name="textLine" id="id_textLine1" 
-							type="radio" value="1" onClick="onChangeLine(1)" checked="checked">横書き
-						<input name="textLine" id="id_textLine2" type="radio" value="2" onClick="onChangeLine(2)">縦書き
+						type="radio" value="1" onClick="onChangeLine(1)" checked="checked"><label for="id_textLine1">Horizontal</label><br>
+								<input name="textLine" id="id_textLine2" type="radio" value="2" onClick="onChangeLine(2)"><label for="id_textLine2">Vertical</label><br>
 						<select name="textFont" id="id_textFont">
 							<option value="ＭＳ ゴシック">ＭＳ ゴシック</option>
 							<option value="ＭＳ Ｐゴシック">ＭＳ Ｐゴシック</option>
@@ -179,23 +173,23 @@
 				</div>
 				<div id="flat9" class="flatbutton" value="1"></div></div>
 				<div id="flatcell10" class="flatcell"><div id="content10" class="flatcontent">
-							<button id="testmap" value="test" onclick="viewMap()">map表示</button>
+							<div id="testmap" value="test" onclick="viewMap()"></div>
 			<div class="row">
 				<div class="cell"></div>
-				<div class="cell"><img id="key1 mapup" src="images/mapkey.png" ></div>
+				<div class="cell"><img id="mapup" class="key1" src="images/mapkey.png" ></div>
 				<div class="cell"></div>
 			</div>
 			<div class="row">
-				<div class="cell"><img id="key2 mapleft" src="images/mapkey.png" ></div>
+				<div class="cell"><img id="mapleft" class="key2" src="images/mapkey.png" ></div>
 				<div class="cell">
-					<button id="mapplus">map+</button>
-					<button id="mapminus">map-</button>
+					<div id="mapplus"></div>
+					<div id="mapminus"></div>
 				</div>
-				<div class="cell"><img id="key3 mapright" src="images/mapkey.png" ></div>
+				<div class="cell"><img id="mapright" class="key2" src="images/mapkey.png" ></div>
 			</div>
 			<div class="row">
 				<div class="cell"></div>
-				<div class="cell"><img id="key4 mapdown" src="images/mapkey.png" ></div>
+				<div class="cell"><img id="mapdown" class="key2" src="images/mapkey.png" ></div>
 				<div class="cell"></div>
 			</div>
 

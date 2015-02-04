@@ -48,7 +48,6 @@ function canvasSetUp() {
       Cca_oldPos = getPos(Cca_event);
 	  MouseDownFlg = true;
 	    //左クリックの処理
-		console.log("mousedown"+Cca_brushInfomation.layerNum);
 		if(Cca_event.button==0&&!animationMode&&!textstampMode){
 			Cca_drawing = true;
 			Cca_brushInfomation.brushWidth = Cto_c.lineWidth;
@@ -64,7 +63,15 @@ function canvasSetUp() {
 		}else if(animationMode){
 			setFrame(Cca_oldPos.x,Cca_oldPos.y);
 		}else if(textstampMode){
-			putTextStamp(Cca_oldPos.x,Cca_oldPos.y); 
+			putTextStamp(Cca_oldPos.x,Cca_oldPos.y,Cto_c.strokeStyle); 
+        	Cso_socket.emit("drawTextStamp", {
+				x:Cca_oldPos.x
+				,y:Cca_oldPos.y
+				,text:getT_stamp()
+				,alpha:getT_alpha()
+				,size:getT_size()
+				,font:getT_font()
+				,fillStyle:Cto_c.strokeStyle});
 			Cto_c.globalAlpha = Cca_brushInfomation.brushGlobalAlpha;
 		}
 		//右クリックの処理
@@ -99,6 +106,8 @@ function canvasSetUp() {
 		  }
         // socket.IOサーバーに、
         // どの点からどの点までを描画するかをの情報を送付する
+		console.log("brushinfo");
+		console.dir(Cca_brushInfomation);
         Cso_socket.emit("draw", {start:Cca_oldPos, end:Cca_pos, info:Cca_brushInfomation});
         Cca_oldPos = Cca_pos;
       }
@@ -154,7 +163,6 @@ function canvasSetUp() {
 			img.onload = function(){
 				Cto_c.drawImage(img,0,0,2000,2000);
 				view(scrollX(),scrollY());
-
 			};
 			img.src = Cto_data.image.data;
 		}
@@ -165,8 +173,19 @@ function canvasSetUp() {
       Cso_socket.on("draw", function (Cto_brushInfomation) {
 		drawLine(Cto_brushInfomation);
       });
+      Cso_socket.on("drawTextStamp", function (Cto_textStamp) {
+		//var oldColor = Cto_c.strokeStyle;
+		setT_alpha(Cto_textStamp.alpha);
+		setT_size(Cto_textStamp.size);
+		setT_font(Cto_textStamp.font);
+		setT_stamp(Cto_textStamp.text)
+		putTextStamp(Cto_textStamp.x,Cto_textStamp.y,Cto_textStamp.fillStyle); 
+		Cto_c.globalAlpha = Cca_brushInfomation.brushGlobalAlpha;
+		console.dir(Cto_textStamp);
+      });
 
 	  Cso_socket.on("logRequest",function (request){
+		console.log("ログのリクエスト要求が着ました");
 	  	Cso_socket.emit("png",{png:Cto_canvas.toDataURL(),userID:request.userID});
 	  });
 
@@ -192,6 +211,7 @@ function canvasSetUp() {
 				0,Cto_brushInfomation.end.x,Cto_brushInfomation.end.y,Cto_brushInfomation.info.brushWidth/2);
 			Cto_brushInfomation.info.grad.addColorStop(0, "rgba("+cutR+","+cutG+","+cutB+","+"0.5)");
         	Cto_brushInfomation.info.grad.addColorStop(1, "rgba("+cutR+","+cutG+","+cutB+","+"0)");
+			oncontext.globalCompositeOperation = Cto_brushInfomation.info.globalCompositeOperation;//変更点１
 			oncontext.beginPath();
 			oncontext.fillStyle = Cto_brushInfomation.info.grad;
 			oncontext.arc(Cto_brushInfomation.end.x,Cto_brushInfomation.end.y,Cto_brushInfomation.info.brushWidth/2,0,Math.PI*2,false);
@@ -228,9 +248,6 @@ function canvasSetUp() {
 	var MAX_scrollY = canvaswindow.scrollHeight - document.getElementById("canvas_canvas").getBoundingClientRect().height;
 	canvaswindow.scrollTop = MAX_scrollY/2;
 	canvaswindow.scrollLeft = MAX_scrollX/2;
-
-
-	
 }
 
 

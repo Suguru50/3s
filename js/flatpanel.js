@@ -17,7 +17,11 @@ function flatpanelSetup(){
 				buttonOpen($(this),openright*3,opentop,300,400);
 				break;
 			case "flat8":
+			case "flat10":
 				buttonOpen($(this),openright*2,opentop,300,400);
+				break;
+			case "flat9":
+				buttonOpen($(this),openright*3,opentop,300,100);
 				break;
 			case "flat9":
 				buttonOpen($(this),openright*3,opentop,300,400);

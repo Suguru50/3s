@@ -21,7 +21,8 @@ $(function() {
 		position: 'absolute',
 		width: '100%',
 		height: '100%',
-		background: '#000',
+		background: '#FFF',
+		color: '#000',
 		zIndex: '100000'
 	});
 });
@@ -143,6 +144,10 @@ function ajaxEnter(){
 					leaveButtonSetUp();
 					enterRoom(Cso_msg,Cso_user);
 					flatpanelSetup();
+					$("#flatpanel,.slideLOuter").draggable({
+						//containment: '#jquery-ui-draggable-wrap',
+						scroll: false
+					} );
 				},error:function() {
 					alert('error');
 				}

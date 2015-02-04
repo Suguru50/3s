@@ -91,7 +91,7 @@ var keyState = input.getState();
 )(jQuery);
 
 $(document).ready(function () {
-$('#canvas_canvas').dragScroll(); // ドラッグスクロール設定
+	$('#canvas_canvas').dragScroll(); // ドラッグスクロール設定
 });
 
 
