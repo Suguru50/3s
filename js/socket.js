@@ -2,8 +2,8 @@
 //  var Cso_socket = io.connect(); //リモート環境？
   //var Cso_socket = io.connect('https://localhost:3000'); //ローカル
   //var Cso_socket = io.connect('https://hacneec.sakura.ne.jp:3000/'); //ローカル
-  //var Cso_socket = io.connect('https://172.16.73.57:3000'); //学校用
-  var Cso_socket = io.connect('https://210.152.156.188:3000'); 
+  //var Cso_socket = io.connect('https://172.16.73.181:3000'); //学校用h
+	var Cso_socket = io.connect('https://210.152.156.188:3000'); 
   var Cso_userName;
 
   //サーバから受け取るイベント

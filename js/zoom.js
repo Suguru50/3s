@@ -1,73 +1,44 @@
 // Zoom
+
 $(function(){
 	var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
 	$(document.getElementById("canvas_canvas")).on(mousewheelevent,function(e){
 		e.preventDefault();
 		var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
-		if (delta < 0){
+
+	
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		//ウィンドウサイズが変わった際に再取得
+		window.onresize = function (e) {
+			width = window.innerWidth;
+			height = window.innerHeight;
+		}
+		var scaleY = (document.getElementById("canvas_canvas").scrollTop-3275+height/2)/20;
+		var scaleX = (document.getElementById("canvas_canvas").scrollLeft-3250+width/2)/20;
+
+		if (delta < 0){			
 			// マウスホイールを下にスクロールしたときの処理を記載
-			if(tool.getPageSize()>0.2){
+			if(tool.getPageSize()>=0.2){
 				tool.setPageSize(tool.getPageSize() - 0.1);
-				/*
-				Cto_layercanvas1.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				Cto_layercanvas2.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				C_tc.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				document.getElementById("canvas_eventCanvas").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				*/
+				document.getElementById("zoomArea").style["-webkit-transform-origin"]=scaleX+"% "+scaleY+"%";
 				document.getElementById("zoomArea").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				if( tool.getPageSize() < 1 ){
-					/*
-					Cto_layercanvas1.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					Cto_layercanvas2.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					C_tc.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					document.getElementById("canvas_eventCanvas").style["-webkit-transform-origin"]=50+"% "+50+"%";
-					*/
-					document.getElementById("zoomArea").style["-webkit-transform-origin"]=50+"% "+50+"%";
-				}else{
-					var hw = (tool.getPageSize()*2500);
-					$(document.getElementById("canvas_margin")).height(hw);
-					$(document.getElementById("canvas_margin")).width(hw);
-				}
+				"scale("+tool.getPageSize()+","+tool.getPageSize()+")";
+		
 			}
 
 		} else {
 			// マウスホイールを上にスクロールしたときの処理を記載
 			if(tool.getPageSize()<4){
 				tool.setPageSize(tool.getPageSize() + 0.1);
-				/*
-				Cto_layercanvas1.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				Cto_layercanvas2.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				C_tc.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-
-				document.getElementById("canvas_eventCanvas").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				*/
+				document.getElementById("zoomArea").style["-webkit-transform-origin"]=scaleX+"% "+scaleY+"%";
 				document.getElementById("zoomArea").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
+				"scale("+tool.getPageSize()+","+tool.getPageSize()+")";
 				
-				if( tool.getPageSize() >= 1 ){
-					var hw = (tool.getPageSize()*2500);
-					$(document.getElementById("canvas_margin")).height(hw);
-					$(document.getElementById("canvas_margin")).width(hw);
-					/*
-					Cto_layercanvas1.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					Cto_layercanvas2.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					C_tc.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					document.getElementById("canvas_eventCanvas").style["-webkit-transform-origin"]=0+"% "+0+"%";
-					*/
-					document.getElementById("zoomArea").style["-webkit-transform-origin"]=0+"% "+0+"%";
-				}
 			}
 		}
 		
+		view();
 		//ズーム倍率の表示
 		document.getElementById("zoomInfo").innerHTML = "<p>"+parseInt(tool.getPageSize()*100)+"%</p>";
 		$("#zoomInfo").fadeIn(function(){
@@ -83,38 +54,24 @@ $(function(){
 
 
 function plus(){
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		//ウィンドウサイズが変わった際に再取得
+		window.onresize = function (e) {
+			width = window.innerWidth;
+			height = window.innerHeight;
+		}
+		var scaleY = (document.getElementById("canvas_canvas").scrollTop-3275+height/2)/20;
+		var scaleX = (document.getElementById("canvas_canvas").scrollLeft-3250+width/2)/20;
+
 			if(tool.getPageSize()<4){
 				tool.setPageSize(tool.getPageSize() + 0.1);
-				/*
-				Cto_layercanvas1.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				Cto_layercanvas2.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				
-				C_tc.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
 
-				document.getElementById("canvas_eventCanvas").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				*/
+				document.getElementById("zoomArea").style["-webkit-transform-origin"]=scaleX+"% "+scaleY+"%";
 				document.getElementById("zoomArea").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-
-				if( tool.getPageSize() >= 1 ){
-					var hw = (tool.getPageSize()*2500);
-					$(document.getElementById("canvas_margin")).height(hw);
-					$(document.getElementById("canvas_margin")).width(hw);
-					/*
-					Cto_layercanvas1.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					Cto_layercanvas2.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					C_tc.style["-webkit-transform-origin"]=0+"% "+0+"%";
-					
-					document.getElementById("canvas_eventCanvas").style["-webkit-transform-origin"]=0+"% "+0+"%";
-					*/
-					document.getElementById("zoomArea").style["-webkit-transform-origin"]=0+"% "+0+"%";
-				}
+					"scale("+tool.getPageSize()+","+tool.getPageSize()+")";
 			}
-		
+		view();
 		//ズーム倍率の表示
 		document.getElementById("zoomInfo").innerHTML = "<p>"+parseInt(tool.getPageSize()*100)+"%</p>";
 		$("#zoomInfo").fadeIn(function(){
@@ -124,36 +81,24 @@ function plus(){
 		});
 }
 function minus(){
-			if(tool.getPageSize()>0.2){
-				tool.setPageSize(tool.getPageSize() - 0.1);
-				/*
-				Cto_layercanvas1.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				Cto_layercanvas2.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				
-				C_tc.style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		//ウィンドウサイズが変わった際に再取得
+		window.onresize = function (e) {
+			width = window.innerWidth;
+			height = window.innerHeight;
+		}
+		var scaleY = (document.getElementById("canvas_canvas").scrollTop-3275+height/2)/20;
+		var scaleX = (document.getElementById("canvas_canvas").scrollLeft-3250+width/2)/20;
 
-				document.getElementById("canvas_eventCanvas").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				*/
+			if(tool.getPageSize()>=0.2){
+				tool.setPageSize(tool.getPageSize() - 0.1);
+
+				document.getElementById("zoomArea").style["-webkit-transform-origin"]=scaleX+"% "+scaleY+"%";
 				document.getElementById("zoomArea").style["-webkit-transform"]=
-				"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-				if( tool.getPageSize() < 1 ){
-					/*
-					Cto_layercanvas1.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					Cto_layercanvas2.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					C_tc.style["-webkit-transform-origin"]=50+"% "+50+"%";
-					document.getElementById("canvas_eventCanvas").style["-webkit-transform-origin"]=50+"% "+50+"%";
-					*/
-					document.getElementById("zoomArea").style["-webkit-transform-origin"]=50+"% "+50+"%";
-				}else{
-					var hw = (tool.getPageSize()*2500);
-					$(document.getElementById("canvas_margin")).height(hw);
-					$(document.getElementById("canvas_margin")).width(hw);
-				}
+					"scale("+tool.getPageSize()+","+tool.getPageSize()+")";
 			}
+		view();
 		//ズーム倍率の表示
 		document.getElementById("zoomInfo").innerHTML = "<p>"+parseInt(tool.getPageSize()*100)+"%</p>";
 		$("#zoomInfo").fadeIn(function(){
@@ -165,19 +110,20 @@ function minus(){
 function zoomReset() {
 	//倍率初期化
 	tool.setPageSize(1);
-	/*
-		Cto_layercanvas1.style["-webkit-transform"]=
-		"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-		Cto_layercanvas2.style["-webkit-transform"]=
-		"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-		C_tc.style["-webkit-transform"]=
-		"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-		
-		document.getElementById("canvas_eventCanvas").style["-webkit-transform"]=
-		"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
-	*/
-		document.getElementById("zoomArea").style["-webkit-transform"]=
-		"scale("+tool.getPageSize()+","+tool.getPageSize()+") translate("+450+"px,"+300+"px)";
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		//ウィンドウサイズが変わった際に再取得
+		window.onresize = function (e) {
+			width = window.innerWidth;
+			height = window.innerHeight;
+		}
+		var scaleY = (document.getElementById("canvas_canvas").scrollTop-3275+height/2)/20;
+		var scaleX = (document.getElementById("canvas_canvas").scrollLeft-3250+width/2)/20;
+
+	document.getElementById("zoomArea").style["-webkit-transform-origin"]=scaleX+"% "+scaleY+"%";
+	document.getElementById("zoomArea").style["-webkit-transform"]=
+		"scale("+tool.getPageSize()+","+tool.getPageSize()+")";
+
 	//ズーム倍率の表示
 	document.getElementById("zoomInfo").innerHTML = "<p>"+parseInt(tool.getPageSize()*100)+"%</p>";
 	$("#zoomInfo").fadeIn(function(){
@@ -187,7 +133,11 @@ function zoomReset() {
 	});
 	
 	//キャンバス中心の表示
-	document.getElementById("canvas_canvas").scrollTop = 1000;
-	document.getElementById("canvas_canvas").scrollLeft = 900;
+
+	var MAX_scrollX = document.getElementById("canvas_canvas").scrollWidth - document.getElementById("canvas_canvas").getBoundingClientRect().width;
+	var MAX_scrollY = document.getElementById("canvas_canvas").scrollHeight - document.getElementById("canvas_canvas").getBoundingClientRect().height;
+	document.getElementById("canvas_canvas").scrollTop = MAX_scrollY/2;
+	document.getElementById("canvas_canvas").scrollLeft = MAX_scrollX/2;
+	view();
 
 }

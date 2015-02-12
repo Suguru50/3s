@@ -115,6 +115,10 @@ function onChangeLine(value) {
 	t_line = value;
 }
 
+function getLineValue(){
+	return t_line;
+}
+
 var s_form;
 
 function CreateStamp() {

@@ -12,7 +12,6 @@
 
 <div class="slideLOuter">
 	<div id="menubarL" class="bar"><img src="images/scaledown.png" class="toggleL toggleButton2"></div>
-		<div id="socketbox">
 			<ul id="flatlist1">
 				<li id="flatrow0" class="flatrow" value="0">
 					<div id="startVideo" class="basebutton" onclick="startVideo();"></div>
@@ -31,7 +30,6 @@
 				<video id="webrtc-remote-video-1" class="webvideo" autoplay></video>
 				<video id="webrtc-remote-video-2" class="webvideo" autoplay></video>
 			</div>
-		</div>
 	</div>
 </div>
 
@@ -44,8 +42,9 @@
 			<canvas id="canvas_myCanvas2"></canvas>
 			<canvas id="canvas_toolcanvas"></canvas>
 		</div>
-		<div id="brushcatcher"></div>
 	</div>
+		<div id="brushcatcher"></div>
+
 </div>
 
 <div id="chat">
@@ -165,10 +164,11 @@
 			<li id="flatrow5" class="flatrow" value="4">
 				<div id="flatcell9" class="flatcell"><div id="content9" class="flatcontent">
 								<ul id="layers">
-				<li><div id="button_horizontal_inner"><div id="viewLayer2" onClick="viewLayer(2)" class="layervisible visible">○</div>
+				<li><div id="button_horizontal_inner"><div id="viewLayer2" onClick="viewLayer(2)" class="layervisible visible"></div>
 					<div id="layer2" onClick="changeLayer(2)" class="layerbutton">Layer 2</div></div></li>
-				<li><div id="button_horizontal_inner"><div id="viewLayer1" onClick="viewLayer(1)" class="layervisible visible">○</div>
+				<li><div id="button_horizontal_inner"><div id="viewLayer1" onClick="viewLayer(1)" class="layervisible visible"></div>
 					<div id="layer1" onClick="changeLayer(1)" class="layerbutton selected">Layer 1</div></div></li>
+				<li><div id="tool_clear">Layer Clear</div></li>
 			</ul>
 				</div>
 				<div id="flat9" class="flatbutton" value="1"></div></div>

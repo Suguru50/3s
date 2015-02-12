@@ -12,28 +12,28 @@
 }
 
 #startVideo{
+	background-color:#FF7F7F;
 	background-image:url("../images/startvideo.png");.
-	background-color: #FF7F7F;
 }
 #stopVideo{
+	background-color:#B87FFF;
 	background-image:url("../images/stopvideo.png");.
-	background-color: #B87FFF;
 }
 #Connect{
+	background-color:#98FF82;
 	background-image:url("../images/connect.png");.
-	background-color: #98FF82;
 }
 #startCapture{
+	background-color:#7FD8FF;
 	background-image:url("../images/startcapture.png");.
-	background-color: #7FD8FF;
 }
 #videoscaleup{
+	background-color:#FCFF7F;
 	background-image:url("../images/videoscaleup.png");.
-	background-color: #FCFF7F;
 }
 #videoscaledown{
+	background-color:#FFB021;
 	background-image:url("../images/videoscaledown.png");.
-	background-color: #FFB021;
 }
 
 video{

@@ -35,9 +35,13 @@ function canvasSetUp() {
       return div.scrollTop;
     }
     function getPos (Cca_event) {
+/*
       var Cca_mouseY = (Cca_event.clientY - $(Cto_canvas).position().top)/tool.getPageSize();
       var Cca_mouseX = (Cca_event.clientX - ($(Cto_canvas).position().left-200+
 				  parseInt($(canvas_canvas).css('margin-left'),10)))/tool.getPageSize();
+*/
+		var Cca_mouseY = (Cca_event.clientY + scrollY()-$("#zoomArea").position().top-50)/tool.getPageSize();
+		var Cca_mouseX = (Cca_event.clientX + scrollX()-$("#zoomArea").position().left)/tool.getPageSize();
 	  //幅が大きくなった場合にposition().leftが大きくならないのが原因
 	  //200は左のメニューの開閉クリック領域を含む幅
 	  return {x:Cca_mouseX, y:Cca_mouseY};
@@ -71,6 +75,7 @@ function canvasSetUp() {
 				,alpha:getT_alpha()
 				,size:getT_size()
 				,font:getT_font()
+				,line:getLineValue()
 				,fillStyle:Cto_c.strokeStyle});
 			Cto_c.globalAlpha = Cca_brushInfomation.brushGlobalAlpha;
 		}
@@ -178,7 +183,8 @@ function canvasSetUp() {
 		setT_alpha(Cto_textStamp.alpha);
 		setT_size(Cto_textStamp.size);
 		setT_font(Cto_textStamp.font);
-		setT_stamp(Cto_textStamp.text)
+		setT_stamp(Cto_textStamp.text);
+		onChangeLine(Cto_textStamp.line);
 		putTextStamp(Cto_textStamp.x,Cto_textStamp.y,Cto_textStamp.fillStyle); 
 		Cto_c.globalAlpha = Cca_brushInfomation.brushGlobalAlpha;
 		console.dir(Cto_textStamp);

@@ -12,6 +12,11 @@ $(".toggleButton1,.toggleButton2").click(function(){
 						thispp.css('height', 390);
 						thispp.css('overflow', 'visible');
 					}.bind(this));
+				}else if($(".slideLOuter").hasClass("scaledoubleup")){
+					thispp.stop().animate({ height: 690 },500,function(){
+						thispp.css('height', 690);
+						thispp.css('overflow', 'visible');
+					}.bind(this));
 				}else{
 					thispp.stop().animate({ height: 160 },500,function(){
 						thispp.css('height', 160);

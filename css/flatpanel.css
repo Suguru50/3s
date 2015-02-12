@@ -173,20 +173,20 @@ body{
 	overflow:hidden;
 }
 #flat9{
-	background-color:rgba(255, 99, 53, 1);
+	background-color:rgba(255, 99, 142, 1);
 	background-image:url('../images/layer1.png');
 }
 #content9{
-	background-color:rgba(244, 84, 36, 1);
+	background-color:rgba(255, 67, 117, 1);
 	width:70px;
 	overflow:hidden;
 }
 #flat10{
-	background-color:rgba(255, 39, 39, 1);
+	background-color:rgba(122, 77, 255, 1);
 	background-image:url('../images/map.png');
 }
 #content10{
-	background-color:rgba(241, 27, 27, 1);
+	background-color:rgba(97, 27, 241, 1);
 	width:70px;
 	overflow:hidden;
 }

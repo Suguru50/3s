@@ -258,6 +258,11 @@ var localVideo = document.getElementById('local-video');
 		stopConnection(id);
         Cso_socket.json.send({type: "user dissconnected", sendto: id });
 		conn=false;
+    	videoElementsInUse = [];
+    	videoElementsStandBy = [];
+  pushVideoStandBy(getVideoForRemote(0));
+  pushVideoStandBy(getVideoForRemote(1));
+  pushVideoStandBy(getVideoForRemote(2));
 		/*
 		switch(removeVideoId.id){
 			case "webrtc-remote-video-0":
@@ -311,6 +316,11 @@ var localVideo = document.getElementById('local-video');
       //stop();
       detachVideo(id); // force detach video
       stopConnection(id);
+    	videoElementsInUse = [];
+    	videoElementsStandBy = [];
+  pushVideoStandBy(getVideoForRemote(0));
+  pushVideoStandBy(getVideoForRemote(1));
+  pushVideoStandBy(getVideoForRemote(2));
     }
   }
  
@@ -422,9 +432,14 @@ var localVideo = document.getElementById('local-video');
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-    navigator.webkitGetUserMedia({video: true, audio: true},
+	  console.log("startVideo?");
+	  console.dir(localVideo);
+	  console.dir(navigator);
+    //navigator.webkitGetUserMedia({video: true, audio: true},
+    navigator.webkitGetUserMedia({video: true},
      function (stream) { // success
       localStream = stream;
+	  console.log("startVideo");
       localVideo.src = window.webkitURL.createObjectURL(stream);
       localVideo.play();
       localVideo.volume = 0;

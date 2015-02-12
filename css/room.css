@@ -36,7 +36,18 @@
 }
 
 #tool_clear{
-	width:100%;
+	width:300px;
+	height:35px;
+	font-family: 'title';
+	font-size: 16px;
+	background: #faa;
+	text-align:center;
+	display:table-cell;
+	vertical-align: middle;
+	cursor: pointer;
+}
+#tool_clear:hover{
+	background: #f88;
 }
 
 #list_airbrush{
@@ -73,6 +84,8 @@
 	/*background: #FFFDD0;*/
 	background-image: url("../images/chatback.png");
 	z-index:150;
+	margin-right:180px;
+	margin-left:180px;
 }
 
 #canvas_canvas {
@@ -200,8 +213,9 @@ article {
 
 
 #canvas_margin {
-	width: 2500px;
-	height: 2500px;	
+	width: 8500px;
+	height: 8500px;	
+	position: absolute;
 }
 
 #buttonblock{
@@ -211,43 +225,38 @@ article {
 
 #canvas_eventCanvas {
 	position: absolute;
-	margin: -50px -200px 0 -200px;
+	/* margin: -50px 0 0 0; */
 	background: white;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
-	-webkit-transform: translate(450px,300px) !important;
+	/* -webkit-transform: translate(450px,300px) !important; */
+	z-index: 95;
 }
 
 #canvas_myCanvas1 {
 	position: absolute;
-	margin: -50px -200px 0 -200px;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
-	-webkit-transform: translate(450px,300px);
 	z-index: 96;
 }
 
 #canvas_myCanvas2 {
 	position: absolute;
-	margin: -50px -200px 0 -200px;
 	/*background: white;*/
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
-	-webkit-transform: translate(450px,300px);
 	z-index: 97;
 }
 
 #canvas_toolcanvas{
 	position: absolute;
-	margin: -50px -200px 0 -200px;
 	opacity:0.333;
 	vertical-align: bottom;
 	width: 2000px;
 	height: 2000px;
-	-webkit-transform: translate(450px,300px);
 	z-index: 98;
 }
 
@@ -417,45 +426,60 @@ input[type="range"]:hover ~ #tool_blur_value,input[type="range"]:active ~ #tool_
 	z-index: 1000;
 }
 
+#zoomArea {
+	height: 2000px;
+	width: 2000px;
+	position: absolute;
+	top: 3250px;
+	left: 3250px;
+}
+
 #layers{
-	width:80%;
+	padding-left:0px;
+	width:100%;
 }
 
 .layerbutton{
 	cursor:default;
 	overflow:hidden;
-	background:#999;
-	border: 2px ridge #BBB;
-	-webkit-border-radius: 8px;
+	background:#9E6767;
 	font-family:'title';
-	color:#555;
-	white-space: nowrap;
+	height:35px;
+	text-align:center;
+	vertical-align: middle;
+	line-height: 35px;
 }
 
 .layerbutton.selected{
-	background:
-		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
-		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+	background:#FFCFDD;
 	color:#000;
+	height: 31px;
+	border: 2px solid #f00;
 }
 
 .layervisible{
 	cursor:default;
 	overflow:hidden;
-	background:#999;
-	border: 2px ridge #BBB;
+	background:##AD6976;
 	float:left;
-	-webkit-border-radius: 8px;
 	font-family:'title';
 	color:#AAA;
-	height:19px;
+	height:35px;
+	width: 20px;
+	text-align:center;
+	vertical-align: middle;
+	line-height: 35px;
+}
+.layervisible:after{
+	content: "×";
 }
 .layervisible.visible{
-	background:
-		-webkit-gradient(linear, left top, left bottom, from(#FFF), 
-		color-stop(0.1,#AAA), color-stop(0.8,#DDD), to(#999));
+	background:#FF9191;
 	color:#000;
-	height:19px;
+	height:35px;
+}
+.layervisible.visible:after{
+	content: "○";
 }
 
 @font-face {

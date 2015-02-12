@@ -84,6 +84,7 @@ function viewCallBack(svPanoramaData,svStatus){//processSVDataにあたる(実�
 			heading:270,pitch:0
 		});
 		panorama.setVisible(true);
+		streetButtonSetUp(panorama);
 	}else{
 	//	alert("半径"+PANORAMA_SERCH_RANGE+"ｍ以内にストリートビューのデータが存在しませんでした。"+
 	//			"周辺の地図を表示します。");
@@ -117,6 +118,15 @@ function mapButtonSetUp(map){
 	document.getElementById("mapright").addEventListener("click",mapMoveRight(map));
 	document.getElementById("mapleft").addEventListener("click",mapMoveLeft(map));
 }
+function streetButtonSetUp(paranoma){
+	document.getElementById("mapplus").addEventListener("click",mapZoomIn(panorama));
+	document.getElementById("mapminus").addEventListener("click",mapZoomOut(panorama));
+	document.getElementById("mapup").addEventListener("click",streetMoveN(panorama));
+	document.getElementById("mapdown").addEventListener("click",streetMoveS(panorama));
+	document.getElementById("mapright").addEventListener("click",streetMoveE(panorama));
+	document.getElementById("mapleft").addEventListener("click",streetMoveW(panorama));
+}
+
 
 function viewMap() {
 	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -130,7 +140,7 @@ function emitMapData(inputLatLng){
 
 
 Cso_socket.on("mapViewData",function(mapData){
-	setMap(mapData.latLng.k,mapData.latLng.B);
+	setMap(mapData.latLng.k,mapData.latLng.D);
 });
 
 function mapZoomIn(map){
@@ -161,5 +171,25 @@ function mapMoveRight(map){
 function mapMoveLeft(map){
 	return function(e){
 		map.panBy(-50,0);
+	}
+}
+function streetMoveN(panorama){
+	return function(e){
+		$("div[title='上へ']").trigger("click");
+	}
+}
+function streetMoveS(panorama){
+	return function(e){
+		$("div[title='下へ']").trigger("click");
+	}
+}
+function streetMoveE(panorama){
+	return function(e){
+		$("div[title='右へ']").trigger("click");
+	}
+}
+function streetMoveW(panorama){
+	return function(e){
+		$("div[title='左へ']").trigger("click");
 	}
 }
